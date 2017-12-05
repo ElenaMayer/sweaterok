@@ -38,11 +38,11 @@ AppAsset::register($this);
                 ['label' => 'Orders', 'url' => ['/order/index']]
             ];
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+                $menuItems[] = ['label' => 'Login', 'url' => ['/user/login?returnUrl='. $_SERVER['REQUEST_URI']]];
             } else {
                 $menuItems[] = [
                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/site/logout'],
+                    'url' => ['/user/security/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
             }

@@ -13,10 +13,6 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => 'catalog/list',
     'components' => [
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -31,6 +27,15 @@ return [
         ],
         'cart' => [
             'class' => 'yz\shoppingcart\ShoppingCart',
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                'catalog/<id:\d+>' => 'catalog/list',
+                'catalog/<categoryId:\d+>/<productId:\d+>' => 'catalog/product',
+//                'tag/<tag:.+>' => 'site/tag/',
+            ],
         ],
     ],
     'params' => $params,

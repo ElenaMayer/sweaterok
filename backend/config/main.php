@@ -14,10 +14,6 @@ return [
     'modules' => [],
     'defaultRoute' => 'order/index',
     'components' => [
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -29,6 +25,13 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+//                'catalog/<id:\d+>' => 'catalog/list',
+            ],
         ],
     ],
     'params' => $params,

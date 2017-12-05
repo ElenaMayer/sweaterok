@@ -46,6 +46,17 @@ class CatalogController extends \yii\web\Controller
         ]);
     }
 
+    public function actionProduct($categoryId, $productId)
+    {
+        $category = Category::find()->where(['id' => $categoryId])->one();
+        $product = Product::find()->where(['id' => $productId])->one();
+
+        return $this->render('product', [
+            'category' => $category,
+            'product' => $product,
+        ]);
+    }
+
     public function actionView()
     {
         return $this->render('view');
