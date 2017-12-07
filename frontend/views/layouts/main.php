@@ -1,15 +1,15 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
+use frontend\assets\MyAppAsset;
 use frontend\widgets\Alert;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
 AppAsset::register($this);
+MyAppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -18,60 +18,316 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <script>window.SHOW_LOADING = false;</script>
 </head>
 <body>
     <?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php
-            NavBar::begin([
-                'brandLabel' => 'Shop',
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
-            ]);
-            $itemsInCart = Yii::$app->cart->getCount();
-            $menuItems = [
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
-                ['label' => 'My cart' . ($itemsInCart ? " ($itemsInCart)" : ''), 'url' => ['/cart/list']],
-            ];
 
-            if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Login', 'url' => ['/user/login?returnUrl='. $_SERVER['REQUEST_URI']]];
-            } else {
-                $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/user/security/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ];
-            }
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="http://browsehappy.com/">обновите ваш браузер</a>.</p>
+    <![endif]-->
 
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => $menuItems,
-            ]);
-            NavBar::end();
-        ?>
-
-        <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+    <!-- // LOADING -->
+    <div class="awe-page-loading">
+        <div class="awe-loading-wrapper">
+            <div class="awe-loading-icon">
+                <span class="icon icon-logo"></span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
         </div>
     </div>
+    <!-- // END LOADING -->
+
+    <div id="wrapper" class="main-wrapper">
+        <header id="header" class="awe-menubar-header">
+            <nav class="awemenu-nav headroom" data-responsive-width="1200">
+                <div class="container">
+                    <div class="awemenu-container">
+                        <div class="navbar-header">
+                            <ul class="navbar-icons">
+                                <li class="menubar-account">
+                                    <a href="#" title="" class="awemenu-icon">
+                                        <i class="icon icon-user-circle"></i>
+                                        <span class="awe-hidden-text">Аккаунт</span>
+                                    </a>
+                                    <?php if (Yii::$app->user->isGuest):?>
+                                        <ul class="submenu dropdown">
+                                            <li>
+                                                <a href="#login-popup" title="">Войти</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#login-popup" title="">Зарегистрироваться</a>
+                                            </li>
+                                        </ul>
+                                    <?php else:?>
+                                        <ul class="submenu megamenu">
+                                            <li>
+                                                <div class="container-fluid">
+                                                    <div class="header-account">
+                                                        <div class="header-account-avatar">
+                                                            <a href="#" title="">
+                                                                <img src="/img/samples/avatars/customers/1.jpg" alt="" class="img-circle">
+                                                            </a>
+                                                        </div>
+                                                        <div class="header-account-username">
+                                                            <h4><a href="#"><?= Yii::$app->user->identity->username ?></a></h4>
+                                                        </div>
+                                                        <ul>
+                                                            <li><a href="#">Invite Friends</a></li>
+                                                            <li><a href="#">Account Infomation</a></li>
+                                                            <li><a href="/user/security/logout" data-method='post'>Logout</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    <?php endif;?>
+                                </li>
+                                <li class="menubar-cart">
+                                    <a href="/cart/checkout" title="" class="awemenu-icon menu-shopping-cart">
+                                        <i class="icon icon-shopping-bag"></i>
+                                        <span class="awe-hidden-text">Cart</span>
+                                        <?php /* @var $cart ShoppingCart */
+                                        $cart = Yii::$app->cart;
+
+                                        $products = $cart->getPositions();
+                                        $itemsInCart = $cart->getCount();
+                                        ?>
+                                        <?php if($itemsInCart): ?>
+                                            <?php $itemsInCart = Yii::$app->cart->getCount(); ?>
+                                            <span class="cart-number"><?= $itemsInCart ?></span>
+                                        <?php endif;?>
+                                    </a>
+                                    <?php if($itemsInCart): ?>
+                                        <ul class="submenu megamenu">
+                                        <li>
+                                            <div class="container-fluid">
+                                                <ul class="whishlist">
+                                                    <?php foreach ($products as $product):?>
+                                                        <li>
+                                                        <div class="whishlist-item">
+                                                            <div class="product-image">
+                                                                <a href="<?= $product->images[0]->getUrl()?>" title="<?= Html::encode($product->title)?>">
+                                                                    <?= Html::img($product->images[0]->getUrl(), ['width' => '100%', 'alt'=>$product->title]);?>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product-body">
+                                                                <div class="whishlist-name">
+                                                                    <h3><a href="/catalog/<?=$product->category->slug?>/<?=$product->id?>" title="<?= Html::encode($product->title)?>"><?= Html::encode($product->title)?></a></h3>
+                                                                </div>
+                                                                <div class="whishlist-price">
+                                                                    <span>Сумма:</span>
+                                                                    <strong><?= (int)$product->getCost()?>₽</strong>
+                                                                </div>
+                                                                <div class="whishlist-quantity">
+                                                                    <span>Количество:</span>
+                                                                    <span><?=$product->getQuantity()?></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <a href="#" title="" class="remove">
+                                                            <i class="icon icon-remove"></i>
+                                                        </a>
+                                                    </li>
+                                                    <?php endforeach ?>
+                                                </ul>
+                                                <div class="menu-cart-total">
+                                                    <span>Итого</span>
+                                                    <span class="price"><?= $cart->getCost() ?>₽</span>
+                                                </div>
+                                                <div class="cart-action">
+                                                    <a href="/cart/checkout" title="В корзину" class="btn btn-lg btn-dark btn-outline btn-block">В корзину</a>
+                                                    <a href="/cart/checkout" title="Оформить заказ" class="btn btn-lg btn-primary btn-block">Оформить заказ</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <?php else:?>
+                                        <ul class="submenu megamenu">
+                                            <li>
+                                                <div class="container-fluid">
+                                                    <span class="text-muted">Корзина пуста</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    <?php endif;?>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="awe-logo">
+                            <a href="<?= Yii::$app->homeUrl ?>" title=""><img src="/img/logo.png?1" alt=""></a>
+                        </div><!-- /.awe-logo -->
+                        <ul class="awemenu awemenu-right">
+                            <li class="awemenu-item">
+                                <a href="/catalog/svitera" title="Свитеры">
+                                    <span>Свитеры</span>
+                                </a>
+                            </li>
+                            <li class="awemenu-item">
+                                <a href="/site/contact" title="">
+                                    <span>Контакты</span>
+                                </a>
+                            </li>
+                            <li class="awemenu-item">
+                                <a href="#" title="">
+                                    <span>Доставка</span>
+                                </a>
+                            </li>
+                            <li class="awemenu-item">
+                                <a href="#" title="">
+                                    <span>Оплата</span>
+                                </a>
+                            </li>
+                            <li class="awemenu-item">
+                                <a href="/site/about" title="">
+                                    <span>О нас</span>
+                                </a>
+                            </li>
+                        </ul><!-- /.awemenu -->
+                    </div>
+                </div><!-- /.container -->
+            </nav><!-- /.awe-menubar -->
+        </header><!-- /.awe-menubar-header -->
+
+        <div id="main">
+            <div class="main-header background background-image-heading-products">
+                <div class="container">
+                    <h1>
+                        <?php
+                        if(isset($this->params['breadcrumbs'][0])){
+                            if(is_array($this->params['breadcrumbs'][0])){
+                                echo $this->params['breadcrumbs'][0]['label'];
+                            } else {
+                                echo $this->params['breadcrumbs'][0];
+                            }
+                        }
+                        ?>
+                    </h1>
+                </div>
+            </div>
+            <div id="breadcrumb">
+                <div class="container">
+                    <?= Breadcrumbs::widget([
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    ]) ?>
+                </div>
+            </div>
+
+        <div class="container">
+            <?= Alert::widget() ?>
+            <?= $content ?>
+        </div>
+        <script>
+            $(function() { aweProductSidebar(); });
+        </script>
+    </div><!-- /#wrapper -->
 
     <footer class="footer">
-        <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-        <p class="pull-right"><?= Yii::powered() ?></p>
-        </div>
-    </footer>
+        <div class="footer-wrapper">
+            <div class="footer-widgets">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-6">
+                                    <div class="widget">
+                                        <h3 class="widget-title">О нас</h3>
+                                        <div class="widget-content">
+                                            <p>Компания существует на рынке с 2000 года, занимается производством современного верхнего мужского и женского трикотажа.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-6">
+                                    <div class="widget">
+                                        <h3 class="widget-title">Как с нами связаться</h3>
+                                        <div class="widget-content">
+                                            <p>Телефон: 8 (495) 989—20—11</p>
+                                            <p>Время работы: 09:00-21:00</p>
+                                            <p>Mail: hosoren@gmail.com</p>
+                                        </div>
+                                    </div><!-- /.widget -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            <div class="widget">
+                                <h3 class="widget-title">Доставка</h3>
+                                <ul>
+                                    <li><a href="/cart/checkout" title="Корзина">Корзина</a></li>
+                                    <li><a href="#" title="">Доставка</a></li>
+                                    <li><a href="#" title="">Оплата</a></li>
+                                    <li><a href="#" title="">Возврат</a></li>
+                                    <li><a href="#" title="">Ваши заказы</a></li>
+                                </ul>
+                            </div><!-- /.widget -->
+                        </div>
+                        <div class="col-md-2 col-sm-6">
+                            <div class="widget">
+                                <h3 class="widget-title">Помощь</h3>
+                                <ul>
+                                    <li><a href="/contact" title="Контакты">Контакты</a></li>
+                                    <li><a href="#" title="">Как сделать заказ</a></li>
+                                    <li><a href="#" title="">Оферта</a></li>
+                                    <li><a href="#" title="">Как выбрать размер</a></li>
+                                </ul>
+                            </div><!-- /.widget -->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="widget">
+                                <h3 class="widget-title">Мы в социальных сетях</h3>
 
+                                <ul class="list-socials">
+                                    <li><a href="#" title=""><i class="icon icon-twitter"></i></a></li>
+                                    <li><a href="#" title=""><i class="icon icon-facebook"></i></a></li>
+                                    <li><a href="#" title=""><i class="icon icon-google-plus"></i></a></li>
+                                    <li><a href="#" title=""><i class="icon icon-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="widget">
+                                <h3 class="widget-title">Способы оплаты</h3>
+                                <ul class="list-socials">
+                                    <li>
+                                        <a href="#" title="">
+                                            <i class="fa fa-cc-mastercard"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="">
+                                            <i class="fa fa-cc-visa"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div><!-- /.widget -->
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.footer-widgets -->
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="copyright">
+                        <p>Copyright &copy; 2017 <?= Yii::$app->params['domain'] ?> - Developed by <a href="<?= Yii::$app->params['developerSite'] ?>" rel="external"><?= Yii::$app->params['developer'] ?></a>.</p>
+                    </div>
+                </div>
+            </div><!-- /.footer-copyright -->
+        </div><!-- /.footer-wrapper -->
+        <a href="#" class="back-top" title="">
+                <span class="back-top-image">
+                    <img src="/img/back-top.png" alt="">
+                </span>
+            <small>Наверх</small>
+        </a><!-- /.back-top -->
+    </footer><!-- /footer -->
+
+    <?= $this->render('_login_popup'); ?>
+    <script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
     <?php $this->endBody() ?>
 </body>
 </html>

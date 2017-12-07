@@ -18,26 +18,12 @@ class CartController extends \yii\web\Controller
         }
     }
 
-    public function actionList()
-    {
-        /* @var $cart ShoppingCart */
-        $cart = \Yii::$app->cart;
-
-        $products = $cart->getPositions();
-        $total = $cart->getCost();
-
-        return $this->render('list', [
-           'products' => $products,
-           'total' => $total,
-        ]);
-    }
-
     public function actionRemove($id)
     {
         $product = Product::findOne($id);
         if ($product) {
             \Yii::$app->cart->remove($product);
-            $this->redirect(['cart/list']);
+            $this->redirect(['cart/checkout']);
         }
     }
 
@@ -46,18 +32,16 @@ class CartController extends \yii\web\Controller
         $product = Product::findOne($id);
         if ($product) {
             \Yii::$app->cart->update($product, $quantity);
-            $this->redirect(['cart/list']);
+            $this->redirect(['cart/checkout']);
         }
     }
 
-    public function actionOrder()
+    public function actionCheckout()
     {
         $order = new Order();
-
         /* @var $cart ShoppingCart */
         $cart = \Yii::$app->cart;
 
-        /* @var $products Product[] */
         $products = $cart->getPositions();
         $total = $cart->getCost();
 
@@ -84,14 +68,14 @@ class CartController extends \yii\web\Controller
 
             \Yii::$app->session->addFlash('success', 'Thanks for your order. We\'ll contact you soon.');
             $order->sendEmail();
-
             return $this->redirect('catalog/list');
         }
 
-        return $this->render('order', [
+        return $this->render('checkout', [
             'order' => $order,
             'products' => $products,
             'total' => $total,
         ]);
     }
+
 }

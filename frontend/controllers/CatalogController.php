@@ -6,6 +6,7 @@ use common\models\Category;
 use common\models\Product;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
+use Yii;
 
 class CatalogController extends \yii\web\Controller
 {
@@ -19,7 +20,7 @@ class CatalogController extends \yii\web\Controller
         }
     }
 
-    public function actionList($id = null)
+    public function actionList($slug = null)
     {
         /** @var Category $category */
         $category = null;
@@ -27,39 +28,39 @@ class CatalogController extends \yii\web\Controller
         $categories = Category::find()->indexBy('id')->orderBy('id')->all();
 
         $productsQuery = Product::find();
-        if ($id !== null && isset($categories[$id])) {
-            $category = $categories[$id];
-            $productsQuery->where(['category_id' => $this->getCategoryIds($categories, $id)]);
+
+        if ($slug !== null) {
+            $category = Category::find()->where(['slug' => $slug])->one();
+        }
+        if ($category) {
+            $productsQuery->where(['category_id' => $this->getCategoryIds($categories, $category->id)]);
         }
 
         $productsDataProvider = new ActiveDataProvider([
             'query' => $productsQuery,
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => Yii::$app->params['catalogPageSize'],
             ],
         ]);
 
         return $this->render('list', [
             'category' => $category,
             'menuItems' => $this->getMenuItems($categories, isset($category->id) ? $category->id : null),
-            'productsDataProvider' => $productsDataProvider,
+            'models' => $productsDataProvider->getModels(),
+            'pagination' => $productsDataProvider->getPagination(),
+            'pageCount' => $productsDataProvider->getCount(),
         ]);
     }
 
-    public function actionProduct($categoryId, $productId)
+    public function actionProduct($categorySlug, $productId)
     {
-        $category = Category::find()->where(['id' => $categoryId])->one();
+        $category = Category::find()->where(['slug' => $categorySlug])->one();
         $product = Product::find()->where(['id' => $productId])->one();
 
         return $this->render('product', [
             'category' => $category,
             'product' => $product,
         ]);
-    }
-
-    public function actionView()
-    {
-        return $this->render('view');
     }
 
     /**
@@ -83,7 +84,6 @@ class CatalogController extends \yii\web\Controller
         }
         return $menuItems;
     }
-
 
     /**
      * Returns IDs of category and all its sub-categories
