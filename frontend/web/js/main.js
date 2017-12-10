@@ -117,13 +117,13 @@ function awePriceSlider($selector) {
     }
 
     $selector.slider({
-        values: [35, 250],
-        min: 10,
-        max: 320,
-        step: 10,
+        values: [300, 5000],
+        min: 300,
+        max: 5000,
+        step: 100,
         range: true,
         slide: function(e, ui) {
-            $('#amount').text('$'+ui.value);
+            $('#amount').text(ui.value+'₽');
         }
     });
 }

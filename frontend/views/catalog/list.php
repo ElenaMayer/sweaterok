@@ -17,34 +17,32 @@ if($category) {
             <form action="product-grid.html" method="POST" class="form-inline" >
                 <div class="row">
                     <div class="col-md-4 col-sm-6">
-                        <div class="view-icons">
-                            <a href="#" class="view-icon active"><span class="icon icon-th"></span></a>
-                            <a href="#" class="view-icon "><span class="icon icon-th-list"></span></a>
-                        </div>
-                        <div class="view-count">
-                            <?php
-                            $begin = $pagination->getPage() * $pagination->pageSize + 1;
-                            $end = $begin + $pageCount - 1;
-                            ?>
-                            <span class="text-muted">Item <?= $begin ?> to <?= $end ?> of <?= $pagination->totalCount ?> Items</span>
-                        </div>
+                        <div class="form-group pull-left">
+                            <label for="p_show">Показать</label>
+                            <select name="p_show" id="p_show" class="form-control input-sm">
+                                <option value="">10</option>
+                                <option value="">25</option>
+                                <option value="">50</option>
+                            </select>
+                            <strong>на странице</strong>
+
+                        </div><!-- /.form-group -->
                     </div>
                     <div class="col-md-8 col-sm-6 col-xs-12">
                         <div class="form-show-sort">
-                            <div class="form-group pull-left">
-                                <label for="p_show">Show</label>
-                                <select name="p_show" id="p_show" class="form-control input-sm">
-                                    <option value="">10</option>
-                                    <option value="">25</option>
-                                    <option value="">50</option>
-                                </select>
-                                <strong>per page</strong>
-                            </div><!-- /.form-group -->
+                            <div class="view-count">
+                                <?php
+                                $begin = $pagination->getPage() * $pagination->pageSize + 1;
+                                $end = $begin + $pageCount - 1;
+                                ?>
+                                <span class="text-muted">Товар с <?= $begin ?> по <?= $end ?> из <?= $pagination->totalCount ?></span>
+                            </div>
                             <div class="form-group pull-right text-right">
-                                <label for="p_sort_by">Sort By</label>
+                                <label for="p_sort_by">Сортировка</label>
                                 <select name="p_sort_by" id="p_sort_by" class="form-control input-sm">
-                                    <option value="">Lastest</option>
-                                    <option value="">Recommend</option>
+                                    <option value="">По популярности</option>
+                                    <option value="">По новинкам</option>
+                                    <option value="">По цене</option>
                                 </select>
                             </div><!-- /.form-group -->
                         </div>
@@ -55,7 +53,9 @@ if($category) {
         <div class="products products-grid-wrapper">
             <div class="row">
                 <?php foreach (array_values($models) as $index => $model) :?>
-                    <?= $this->render('_product', ['model'=>$model, 'category' => $category]); ?>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <?= $this->render('_product', ['model'=>$model, 'category' => $category]); ?>
+                    </div>
                 <?php endforeach;?>
             </div><!-- /.row -->
         </div><!-- /.products -->
@@ -74,7 +74,7 @@ if($category) {
         <div id="shop-widgets-filters" class="shop-widgets-filters">
             <div id="widget-area" class="widget-area">
                 <div class="widget woocommerce widget_product_categories">
-                    <h3 class="widget-title">Categories</h3>
+                    <h3 class="widget-title">Категории</h3>
                     <?= Menu::widget([
                         'items' => $menuItems,
                         'options' => [
@@ -83,261 +83,21 @@ if($category) {
                     ]) ?>
                 </div><!-- /.widget -->
                 <div class="widget woocommerce">
-                    <h3 class="widget-title">Sizes</h3>
+                    <h3 class="widget-title">Размеры</h3>
 
                     <div class="widget-content">
                         <label class="label-select">
                             <select name="product-sizes" class="form-control">
-                                <option value="">Size A</option>
-                                <option value="">Size B</option>
-                                <option value="">Size C</option>
-                                <option value="">Size D</option>
+                                <option value="">42</option>
+                                <option value="">44</option>
+                                <option value="">46</option>
+                                <option value="">48</option>
                             </select>
                         </label>
                     </div>
                 </div><!-- /.widget -->
-
-
-                <div class="widget">
-                    <h3 class="widget-title">Brands</h3>
-
-                    <div class="widget-content">
-                        <div class="awewoo-brand">
-                            <div class="awewoo-brand-header">
-                                <input type="text" class="form-control" placeholder="Find your brand">
-                            </div>
-
-                            <div class="awewoo-brand-content">
-                                <div class="nano" style="max-height: 150px;">
-                                    <div class="nano-content">
-                                        <ul>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Vans</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>The Hood</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Kill City</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Baby Milo</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Baby Milo</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>The Police</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Vans</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>The Hood</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Kill City</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Baby Milo</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Baby Milo</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>The Police</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Vans</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>The Hood</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Kill City</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Baby Milo</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Baby Milo</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>The Police</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Vans</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>The Hood</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Kill City</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Baby Milo</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>Baby Milo</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="">
-                                                        <span>The Police</span>
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="widget woocommerce widget_product_prices_filter">
-                    <h3 class="widget-title">Prices</h3>
+                    <h3 class="widget-title">Цена</h3>
 
                     <div class="widget-content">
                         <div class="ranger-wrapper">
@@ -345,10 +105,10 @@ if($category) {
                         </div>
 
                         <div class="center small gray">
-                            <span>Start from</span>
-                            <span id="amount" class="dark bold">$35</span>
-                            <span>to</span>
-                            <span class="dark bold">$320</span>
+                            <span>От</span>
+                            <span id="amount" class="dark bold">300₽</span>
+                            <span>до</span>
+                            <span id="amount" class="dark bold">5000₽</span>
                         </div>
                     </div>
                 </div>
@@ -359,7 +119,7 @@ if($category) {
 
 
                 <div class="widget">
-                    <h3 class="widget-title">Colors</h3>
+                    <h3 class="widget-title">Цвет</h3>
 
                     <div class="wiget-content">
                         <div class="colors square">
@@ -375,10 +135,10 @@ if($category) {
 
 
                 <div class="widget woocommerce widget_product_prices">
-                    <h3 class="widget-title">Prices</h3>
+                    <h3 class="widget-title">Цена</h3>
 
                     <ul>
-                        <li><a href="#" title="">None</a></li>
+                        <li><a href="#" title="">Не задана</a></li>
                         <li><a href="#" title="">$35  -  $100</a></li>
                         <li class="active"><a href="#" title="">$100 - $200</a></li>
                         <li><a href="#" title="">$200 - $300</a></li>
@@ -395,7 +155,7 @@ if($category) {
 
         <div id="open-filters">
             <i class="fa fa-filter"></i>
-            <span>Filter</span>
+            <span>Фильтр</span>
         </div>
     </div><!-- /.col-* -->
 </div><!-- /.row -->

@@ -60,11 +60,10 @@ MyAppAsset::register($this);
                                     <?php if (Yii::$app->user->isGuest):?>
                                         <ul class="submenu dropdown">
                                             <li>
-                                                <a href="#login-popup" title="">Войти</a>
+                                                <a href="/user/login" title="Вход">Вход</a>
                                             </li>
-
                                             <li>
-                                                <a href="#login-popup" title="">Зарегистрироваться</a>
+                                                <a href="/user/register" title="Регистрация">Регистрация</a>
                                             </li>
                                         </ul>
                                     <?php else:?>
@@ -81,9 +80,9 @@ MyAppAsset::register($this);
                                                             <h4><a href="#"><?= Yii::$app->user->identity->username ?></a></h4>
                                                         </div>
                                                         <ul>
-                                                            <li><a href="#">Invite Friends</a></li>
-                                                            <li><a href="#">Account Infomation</a></li>
-                                                            <li><a href="/user/security/logout" data-method='post'>Logout</a></li>
+                                                            <li><a href="#">Мои заказы</a></li>
+                                                            <li><a href="#">Мои данные</a></li>
+                                                            <li><a href="/user/security/logout" data-method='post'>Выйти</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -92,9 +91,9 @@ MyAppAsset::register($this);
                                     <?php endif;?>
                                 </li>
                                 <li class="menubar-cart">
-                                    <a href="/cart/checkout" title="" class="awemenu-icon menu-shopping-cart">
+                                    <a href="/cart/checkout" title="Корзина" class="awemenu-icon menu-shopping-cart">
                                         <i class="icon icon-shopping-bag"></i>
-                                        <span class="awe-hidden-text">Cart</span>
+                                        <span class="awe-hidden-text">Корзина</span>
                                         <?php /* @var $cart ShoppingCart */
                                         $cart = Yii::$app->cart;
 
@@ -123,19 +122,23 @@ MyAppAsset::register($this);
                                                                 <div class="whishlist-name">
                                                                     <h3><a href="/catalog/<?=$product->category->slug?>/<?=$product->id?>" title="<?= Html::encode($product->title)?>"><?= Html::encode($product->title)?></a></h3>
                                                                 </div>
-                                                                <div class="whishlist-price">
-                                                                    <span>Сумма:</span>
-                                                                    <strong><?= (int)$product->getCost()?>₽</strong>
+                                                                <div class="whishlist-size">
+                                                                    <span>Размер:</span>
+                                                                    <strong>42</strong>
                                                                 </div>
-                                                                <div class="whishlist-quantity">
-                                                                    <span>Количество:</span>
-                                                                    <span><?=$product->getQuantity()?></span>
+                                                                <?php if($quantity = $product->getQuantity() > 1):?>
+                                                                    <div class="whishlist-quantity">
+                                                                        <span>Количество:</span>
+                                                                        <span><?=$product->getQuantity()?></span>
+                                                                    </div>
+                                                                <?php endif;?>
+                                                                <div class="whishlist-price">
+                                                                    <span>Стоимость:</span>
+                                                                    <strong><?= (int)$product->getCost()?>₽</strong>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <a href="#" title="" class="remove">
-                                                            <i class="icon icon-remove"></i>
-                                                        </a>
+                                                        <?= Html::a('<span class="icon icon-remove"></span>', ['cart/remove', 'id' => $product->getId()], ['class' => 'remove-cart', 'title' => "Удалить"])?>
                                                     </li>
                                                     <?php endforeach ?>
                                                 </ul>
@@ -163,31 +166,37 @@ MyAppAsset::register($this);
                             </ul>
                         </div>
                         <div class="awe-logo">
-                            <a href="<?= Yii::$app->homeUrl ?>" title=""><img src="/img/logo.png?1" alt=""></a>
+                            <a href="<?= Yii::$app->homeUrl ?>" title="Главная"><img src="/img/logo.png?1" alt=""></a>
                         </div><!-- /.awe-logo -->
                         <ul class="awemenu awemenu-right">
+                            <?php
+                            //$categories = \common\models\Category::find()->where(['is_active' => 1])->all();
+                            $categories = \common\models\Category::find()->all();
+                            ?>
+                            <?php foreach ($categories as $category): ?>
+                                <li class="awemenu-item">
+                                    <a href="/catalog/<?=$category->slug ?>" title="<?=$category->title ?>">
+                                        <span><?=$category->title ?></span>
+                                    </a>
+                                </li>
+                            <?php endforeach;?>
                             <li class="awemenu-item">
-                                <a href="/catalog/svitera" title="Свитеры">
-                                    <span>Свитеры</span>
-                                </a>
-                            </li>
-                            <li class="awemenu-item">
-                                <a href="/site/contact" title="">
+                                <a href="/site/contact" title="Контакты">
                                     <span>Контакты</span>
                                 </a>
                             </li>
                             <li class="awemenu-item">
-                                <a href="#" title="">
+                                <a href="#" title="Доставка">
                                     <span>Доставка</span>
                                 </a>
                             </li>
                             <li class="awemenu-item">
-                                <a href="#" title="">
+                                <a href="#" title="Оплата">
                                     <span>Оплата</span>
                                 </a>
                             </li>
                             <li class="awemenu-item">
-                                <a href="/site/about" title="">
+                                <a href="/site/about" title="О нас">
                                     <span>О нас</span>
                                 </a>
                             </li>
@@ -204,7 +213,8 @@ MyAppAsset::register($this);
                         <?php
                         if(isset($this->params['breadcrumbs'][0])){
                             if(is_array($this->params['breadcrumbs'][0])){
-                                echo $this->params['breadcrumbs'][0]['label'];
+                                if (isset($this->params['breadcrumbs'][0]['label']))
+                                    echo $this->params['breadcrumbs'][0]['label'];
                             } else {
                                 echo $this->params['breadcrumbs'][0];
                             }
@@ -285,27 +295,26 @@ MyAppAsset::register($this);
                                 <h3 class="widget-title">Мы в социальных сетях</h3>
 
                                 <ul class="list-socials">
-                                    <li><a href="#" title=""><i class="icon icon-twitter"></i></a></li>
-                                    <li><a href="#" title=""><i class="icon icon-facebook"></i></a></li>
-                                    <li><a href="#" title=""><i class="icon icon-google-plus"></i></a></li>
-                                    <li><a href="#" title=""><i class="icon icon-pinterest"></i></a></li>
+                                    <li><a href="#" title="instagram"><i class="icon fa fa-instagram"></i></a></li>
+                                    <li><a href="#" title="vk"><i class=" fa fa-vk"></i></a></li>
+                                    <li><a href="#" title="facebook"><i class="icon icon-facebook"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="widget">
-                                <h3 class="widget-title">Способы оплаты</h3>
-                                <ul class="list-socials">
-                                    <li>
-                                        <a href="#" title="">
-                                            <i class="fa fa-cc-mastercard"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="">
-                                            <i class="fa fa-cc-visa"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div><!-- /.widget -->
+<!--                            <div class="widget">-->
+<!--                                <h3 class="widget-title">Способы оплаты</h3>-->
+<!--                                <ul class="list-socials">-->
+<!--                                    <li>-->
+<!--                                        <a href="#" title="">-->
+<!--                                            <i class="fa fa-cc-mastercard"></i>-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <a href="#" title="">-->
+<!--                                            <i class="fa fa-cc-visa"></i>-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div><!-- /.widget -->
                         </div>
                     </div>
                 </div>
@@ -326,9 +335,8 @@ MyAppAsset::register($this);
         </a><!-- /.back-top -->
     </footer><!-- /footer -->
 
-    <?= $this->render('_login_popup'); ?>
-    <script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
     <?php $this->endBody() ?>
+    <script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
 </body>
 </html>
 <?php $this->endPage() ?>

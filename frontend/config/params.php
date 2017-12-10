@@ -7,4 +7,7 @@ return [
     'title' => 'Твой лучший Свитерок',
     'developerSite' => '',
     'developer' => 'Mayer Elena',
+    'indexPageProductCount' => 7,
+    'indexPageNoveltyCount' => 10,
+    'productPageRelatedCount' => 10,
 ];

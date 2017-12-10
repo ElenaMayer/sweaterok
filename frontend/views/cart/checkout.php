@@ -25,32 +25,14 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
         ]);
         $labels = $order->attributeLabels(); ?>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="first_name">Имя <sup>*</sup></label>
-                    <input type="text" class="form-control dark" id="first_name" placeholder="Имя">
-                </div><!-- /.form-group -->
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="last_name">Фамилия</label>
-                    <input type="text" class="form-control dark" id="last_name" placeholder="Фамилия">
-                </div><!-- /.form-group -->
-            </div>
-        </div>
+        <div class="form-group">
+            <label for="address">ФИО <sup>*</sup></label>
+            <input type="text" class="form-control dark" id="fio" placeholder="Адрес">
+        </div><!-- /.form-group -->
         <div class="form-group">
             <label for="address">Адрес <sup>*</sup></label>
             <input type="text" class="form-control dark" id="address" placeholder="Адрес">
         </div><!-- /.form-group -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="street-address">Город <sup>*</sup></label>
-                    <input type="text" class="form-control dark" id="street-address" placeholder="Город">
-                </div><!-- /.form-group -->
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-6">
                 <?= $form->field($order, 'email')->textInput(['placeholder' => $labels['email'], 'class' => 'form-control dark']); ?>
@@ -59,7 +41,7 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
                 <?= $form->field($order, 'phone')->textInput(['placeholder' => $labels['phone'], 'class' => 'form-control dark']); ?>
             </div>
         </div>
-        <?= $form->field($order, 'notes')->textarea()->textInput(['class' => 'form-control dark', 'rows' => "3"]); ?>
+        <?= $form->field($order, 'notes')->textarea(['class' => 'form-control dark', 'rows' => "3"]); ?>
         <?php if (Yii::$app->user->isGuest): ?>
             <div class="checkbox">
                 <label>
@@ -90,14 +72,11 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
                                         <a href="/catalog/<?= $product->category->slug?>/<?= $product->id?>" title="<?= $product->price?>"><?= Html::encode($product->title)?></a>
                                     </h3>
                                 </div>
-                                <div class="product-price">
-                                    <span><?= (int)$product->price?>₽</span>
-                                </div>
                                 <div class="product-count">
                                     <?php $quantity = $product->getQuantity()?>
-                                    <?= Html::a('-', ['cart/update', 'id' => $product->getId(), 'quantity' => $quantity - 1], ['class' => 'btn btn-danger', 'disabled' => ($quantity - 1) < 1])?>
-                                    <span><?= $quantity?></span>
-                                    <?= Html::a('+', ['cart/update', 'id' => $product->getId(), 'quantity' => $quantity + 1], ['class' => 'btn btn-success'])?>
+                                    <!-- Html::a('-', ['cart/update', 'id' => $product->getId(), 'quantity' => $quantity - 1], ['class' => 'btn', 'disabled' => ($quantity - 1) < 1])-->
+                                    <span><?= $quantity?>шт.</span>
+                                    <!-- Html::a('+', ['cart/update', 'id' => $product->getId(), 'quantity' => $quantity + 1], ['class' => 'btn'])-->
                                 </div>
                                 <div class="product-price">
                                     <span><?= (int)$product->getCost()?>₽</span>
@@ -129,31 +108,7 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
                 </table>
             </div><!-- /.cart-total -->
             <div class="cart-checkboxes">
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" name="payment" chacked="checked" value="">
-                        <span>Оплата при получении</span>
-                    </label>
-                </div><!-- /.checkbox -->
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" name="payment" value="">
-                        <span>Оплата онлайн</span>
-                    </label>
-
-                    <ul class="list-payments list-inline">
-                        <li>
-                            <a href="#" title="">
-                                <img src="/img/payments/mastercard.png" alt="">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <img src="/img/payments/visa.png" alt="">
-                            </a>
-                        </li>
-                    </ul>
-                </div><!-- /.checkbox -->
+                <h3>Оплата при получении</h3>
             </div><!-- /.cart-checkboxes -->
             <div class="col-xs-12">
                 <?= Html::submitButton('Отправить заказ', ['class' => 'btn btn-lg btn-primary']) ?>

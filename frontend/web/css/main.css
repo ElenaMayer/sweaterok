@@ -2047,7 +2047,8 @@ img {
   color: #ffa200;
 }
 
-.form-control.dark {
+.form-control.dark,
+.form-group .dark input {
   border-color: #333;
 }
 
@@ -4300,6 +4301,10 @@ h2.entry-title {
   display: inline;
 }
 
+.payment-detail-wrapper .product-count {
+  padding-right: 10px;
+}
+
 .payment-detail-wrapper .product-image img {
   max-width: 70px;
 }
@@ -4590,7 +4595,8 @@ h2.entry-title {
 }
 
 .whishlist .whishlist-quantity,
-.whishlist .whishlist-price {
+.whishlist .whishlist-price,
+.whishlist .whishlist-size {
   font-family: Montserrat, Arial, sans-serif;
   color: #898989;
   font-size: 12px;
@@ -7393,7 +7399,7 @@ h2.entry-title {
 }
 
 .menubar-account .submenu {
-  width: 205px;
+  width: 170px;
 }
 
 .submenu .menubar-cart,
@@ -8003,7 +8009,7 @@ h2.entry-title {
 }
 
 .contact-content .dl-horizontal dt {
-  width: 100px;
+  width: 130px;
   text-align: left;
   color: #333;
   text-transform: uppercase;

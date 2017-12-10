@@ -1,8 +1,10 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Product;
 use Yii;
 use frontend\models\ContactForm;
+use common\models\Category;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -61,7 +63,12 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $categories = Category::find()->indexBy('id')->orderBy('id')->all();
+        $novelty = Product::find()->orderBy('id DESC')->limit(Yii::$app->params['indexPageNoveltyCount'])->all();
+        return $this->render('index', [
+            'categories' => $categories,
+            'novelty' => $novelty,
+        ]);
     }
 
     public function actionContact()

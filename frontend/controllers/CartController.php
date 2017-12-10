@@ -6,15 +6,19 @@ use common\models\Order;
 use common\models\OrderItem;
 use common\models\Product;
 use yz\shoppingcart\ShoppingCart;
+use Yii;
 
 class CartController extends \yii\web\Controller
 {
-    public function actionAdd($id)
+    public function actionAdd($id, $returnUrl = null)
     {
         $product = Product::findOne($id);
         if ($product) {
             \Yii::$app->cart->put($product);
-            return $this->goBack();
+            if($returnUrl)
+                return Yii::$app->getResponse()->redirect($returnUrl);
+            else
+                return $this->goBack();
         }
     }
 

@@ -56,10 +56,25 @@ class CatalogController extends \yii\web\Controller
     {
         $category = Category::find()->where(['slug' => $categorySlug])->one();
         $product = Product::find()->where(['id' => $productId])->one();
+        $relatedProducts = Product::find()
+            ->where('id != :id', ['id'=>$productId])
+            ->limit(Yii::$app->params['productPageRelatedCount'])
+            ->all();
 
         return $this->render('product', [
             'category' => $category,
             'product' => $product,
+            'relatedProducts' => $relatedProducts,
+        ]);
+    }
+
+    public function actionQuickview($id)
+    {
+        $product = Product::find()->where(['id' => $id])->one();
+
+        return $this->renderPartial('product_quick_view', [
+            'product' => $product,
+            'returnUrl' => Yii::$app->request->get('returnUrl'),
         ]);
     }
 
@@ -77,7 +92,7 @@ class CatalogController extends \yii\web\Controller
                 $menuItems[$category->id] = [
                     'active' => $activeId === $category->id,
                     'label' => $category->title,
-                    'url' => ['catalog/list', 'id' => $category->id],
+                    'url' => ['catalog/'.$category->slug],
                     'items' => $this->getMenuItems($categories, $activeId, $category->id),
                 ];
             }

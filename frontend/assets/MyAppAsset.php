@@ -43,7 +43,7 @@ class MyAppAsset extends AssetBundle
         "js/awe/awe-carousel-products.js",
         "js/awe/awe-carousel-testimonial.js",
         "js/awe-hosoren.js",
-        "js/main.js",
+        "js/main.js?1",
         //build:js js/docs.js
         "js/plugins/list.min.js",
         "js/docs.js",

@@ -11,7 +11,6 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
-    'defaultRoute' => 'catalog/list',
     'components' => [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -33,6 +32,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'catalog/<slug:\w+>' => 'catalog/list',
+                'catalog/quickview/<id:\d+>' => 'catalog/quickview',
                 'catalog/<categorySlug:\w+>/<productId:\d+>' => 'catalog/product',
 //                'tag/<tag:.+>' => 'site/tag/',
             ],
