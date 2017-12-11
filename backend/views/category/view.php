@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Category */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-view">
@@ -32,6 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'parent_id',
             'title',
             'slug',
+            'is_active',
+            'description',
+            'image',
+            'time',
         ],
     ]) ?>
 

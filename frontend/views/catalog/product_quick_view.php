@@ -15,9 +15,9 @@ use yii\helpers\Html;
                 <a href="/catalog/<?= $product->category->slug?>/<?= $product->id?>" title="<?= $product->title?>"><?= $product->title?></a>
             </h2><!-- /.product-name -->
             <div class="product-status">
-                <span>В наличии</span>
+                <span><?php if($product->is_in_stock):?>В наличии<?php else:?>Отсутствует<?php endif;?></span>
                 <span>-</span>
-                <span>Арт: 12345678</span>
+                <span>Арт: <?= $product->article?></span>
             </div><!-- /.product-status -->
             <div class="product-price">
                 <span class="amount"><?= (int)$product->price?>₽</span>
@@ -25,24 +25,26 @@ use yii\helpers\Html;
             <div class="product-description">
                 <p><?= $product->description?></p>
             </div>
-            <div class="product-list-actions-wrapper">
-                <form action="product-quick-view.html" method="POST">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="p_size">Размер</label>
-                                <select name="p_size" id="p_size" class="form-control">
-                                    <option value="">42</option>
-                                </select>
+            <?php if($product->is_in_stock):?>
+                <div class="product-list-actions-wrapper">
+                    <form action="product-quick-view.html" method="POST">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="p_size">Размер</label>
+                                    <select name="p_size" id="p_size" class="form-control">
+                                        <option value="">42</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form><!-- /.form -->
-                <div class="product-list-actions">
-                    <?= Html::a('В корзину', ['cart/add', 'id' => $product->id, 'returnUrl' => $returnUrl], ['class' => 'btn btn-lg btn-primary'])?>
-                    <?= Html::a('Купить', ['cart/add', 'id' => $product->id, 'returnUrl' => '/cart/checkout'], ['class' => 'btn  btn-primary btn-lg btn-outline'])?>
-                </div><!-- /.product-actions -->
-            </div>
+                    </form><!-- /.form -->
+                        <div class="product-list-actions">
+                            <?= Html::a('В корзину', ['cart/add', 'id' => $product->id, 'returnUrl' => $returnUrl], ['class' => 'btn btn-lg btn-primary'])?>
+                            <?= Html::a('Купить', ['cart/add', 'id' => $product->id, 'returnUrl' => '/cart/checkout'], ['class' => 'btn  btn-primary btn-lg btn-outline'])?>
+                        </div><!-- /.product-actions -->
+                </div>
+            <?php endif;?>
             <div class="product-meta">
                 <span class="product-category">
                     <span>Категория:</span>

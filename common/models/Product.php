@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use Yii;
 use yii\behaviors\SluggableBehavior;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
@@ -16,18 +15,27 @@ use yz\shoppingcart\CartPositionTrait;
  * @property string $description
  * @property integer $category_id
  * @property string $price
+ * @property string $article
+ * @property string $sex
+ * @property integer $is_in_stock
+ * @property integer $is_active
+ * @property integer $is_novelty
+ * @property string $color
+ * @property string $structure
+ * @property string $time
  *
  * @property Image[] $images
  * @property OrderItem[] $orderItems
  * @property Category $category
+ * @property ProductSizes[] $productSizes
  */
 class Product extends \yii\db\ActiveRecord implements CartPositionInterface
 {
     use CartPositionTrait;
-
     /**
      * @inheritdoc
      */
+
     public static function tableName()
     {
         return 'product';
@@ -43,7 +51,6 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
         ];
     }
 
-
     /**
      * @inheritdoc
      */
@@ -51,9 +58,11 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
     {
         return [
             [['description'], 'string'],
-            [['category_id'], 'integer'],
+            [['category_id', 'is_in_stock', 'is_active', 'is_novelty'], 'integer'],
             [['price'], 'number'],
-            [['title'], 'string', 'max' => 255]
+            [['time, color'], 'safe'],
+            [['title', 'slug', 'article', 'sex', 'structure'], 'string', 'max' => 255],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
 
@@ -64,16 +73,24 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'title' => 'Название',
             'slug' => 'Slug',
-            'description' => 'Description',
-            'category_id' => 'Category ID',
-            'price' => 'Price',
+            'description' => 'Описание',
+            'category_id' => 'Категория',
+            'price' => 'Цена',
+            'article' => 'Артикул',
+            'sex' => 'Пол',
+            'is_in_stock' => 'В наличии',
+            'is_active' => 'Показывать',
+            'is_novelty' => 'Новинка',
+            'color' => 'Цвет',
+            'structure' => 'Состав',
+            'time' => 'Время создания',
         ];
     }
 
     /**
-     * @return Image[]
+     * @return \yii\db\ActiveQuery
      */
     public function getImages()
     {
@@ -97,6 +114,14 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductSizes()
+    {
+        return $this->hasMany(ProductSizes::className(), ['product_id' => 'id']);
+    }
+
+    /**
      * @inheritdoc
      */
     public function getPrice()
@@ -110,5 +135,23 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getColors()
+    {
+        $models = $this->find()->all();
+        $colors = [];
+        foreach ($models as $m)
+        {
+            $cs = explode(",",$m->color);
+            foreach ($cs as $c)
+            {
+                if (!in_array($c,$colors))
+                {
+                    $colors[$c] = $c;
+                }
+            }
+        }
+        return $colors;
     }
 }

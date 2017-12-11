@@ -96,31 +96,8 @@ if($category) {
                         </label>
                     </div>
                 </div><!-- /.widget -->
-                <div class="widget woocommerce widget_product_prices_filter">
-                    <h3 class="widget-title">Цена</h3>
-
-                    <div class="widget-content">
-                        <div class="ranger-wrapper">
-                            <div id="price-slider" class="ranger"></div>
-                        </div>
-
-                        <div class="center small gray">
-                            <span>От</span>
-                            <span id="amount" class="dark bold">300₽</span>
-                            <span>до</span>
-                            <span id="amount" class="dark bold">5000₽</span>
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                    $(function() { awePriceSlider(); });
-                </script>
-
-
                 <div class="widget">
                     <h3 class="widget-title">Цвет</h3>
-
                     <div class="wiget-content">
                         <div class="colors square">
                             <a href="#" title=""><span class="color orange"></span></a>
@@ -133,10 +110,8 @@ if($category) {
                     </div>
                 </div>
 
-
                 <div class="widget woocommerce widget_product_prices">
                     <h3 class="widget-title">Цена</h3>
-
                     <ul>
                         <li><a href="#" title="">Не задана</a></li>
                         <li><a href="#" title="">$35  -  $100</a></li>
@@ -147,10 +122,7 @@ if($category) {
                         <li><a href="#" title="">$500  -  $600</a></li>
                     </ul>
                 </div><!-- /.widget -->
-
-
             </div>
-
         </div>
 
         <div id="open-filters">

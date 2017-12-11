@@ -63,8 +63,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $categories = Category::find()->indexBy('id')->orderBy('id')->all();
-        $novelty = Product::find()->orderBy('id DESC')->limit(Yii::$app->params['indexPageNoveltyCount'])->all();
+        $categories = Category::find()->where(['is_active' => 1])->indexBy('id')->orderBy('id')->all();
+        $novelty = Product::find()->where(['is_active' => 1, 'is_in_stock' => 1, 'is_novelty' => 1])->orderBy('id DESC')->limit(Yii::$app->params['indexPageNoveltyCount'])->all();
         return $this->render('index', [
             'categories' => $categories,
             'novelty' => $novelty,

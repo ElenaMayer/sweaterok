@@ -23,7 +23,7 @@ class MyAppAsset extends AssetBundle
         "js/vendor/jquery-ui.min.js",
         //build:js js/plugins.js
         "js/plugins/bootstrap.min.js",
-        "js/plugins/awemenu.min.js",
+        "js/plugins/awemenu.min.js?1",
         "js/plugins/headroom.min.js",
         "js/plugins/hideshowpassword.min.js",
         "js/plugins/jquery.parallax-1.1.3.min.js",

@@ -34,7 +34,6 @@ return [
                 'catalog/<slug:\w+>' => 'catalog/list',
                 'catalog/quickview/<id:\d+>' => 'catalog/quickview',
                 'catalog/<categorySlug:\w+>/<productId:\d+>' => 'catalog/product',
-//                'tag/<tag:.+>' => 'site/tag/',
             ],
         ],
     ],

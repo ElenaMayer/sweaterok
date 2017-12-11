@@ -64,6 +64,7 @@ class CategoryController extends Controller
         $categories = Category::find()->all();
         $model = new Category();
         $model->parent_id = $id;
+        $model->is_active = 1;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

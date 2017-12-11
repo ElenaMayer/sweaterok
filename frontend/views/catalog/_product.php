@@ -7,7 +7,7 @@ use yii\helpers\Url;
 <div class="product product-grid">
     <div class="product-media">
         <div class="product-thumbnail">
-            <a href="/catalog/<?= $category->slug?>/<?= $model->id?>" title="<?= $model->title?>">
+            <a href="/catalog/<?= $model->category->slug?>/<?= $model->id?>" title="<?= $model->title?>">
                 <?php
                 $images = $model->images;?>
                 <?php if (isset($images[0])):?>
@@ -24,9 +24,11 @@ use yii\helpers\Url;
         </div><!-- /.product-thumbnail -->
         <div class="product-hover">
             <div class="product-actions">
-                <?= Html::a('<i class="icon icon-box"></i>', ['cart/add', 'id' => $model->id, 'returnUrl' => '/cart/checkout'], ['class' => 'awe-button', 'title' => "Купить", 'data-toggle' => "tooltip"])?>
-                <?= Html::a('<i class="icon icon-shopping-bag"></i>', ['cart/add', 'id' => $model->id], ['class' => 'awe-button product-add-cart', 'title' => "В корзину", 'data-toggle' => "tooltip"])?>
-                <?= Html::a('<i class="icon icon-eye"></i>', ['catalog/quickview', 'id' => $model->id, 'returnUrl' => Url::current([],true)],
+                <?php if($model->is_in_stock):?>
+                    <?= Html::a('<i class="icon icon-box"></i>', ['cart/add', 'id' => $model->id, 'returnUrl' => '/cart/checkout'], ['class' => 'awe-button', 'title' => "Купить", 'data-toggle' => "tooltip"])?>
+                    <?= Html::a('<i class="icon icon-shopping-bag"></i>', ['cart/add', 'id' => $model->id], ['class' => 'awe-button product-add-cart', 'title' => "В корзину", 'data-toggle' => "tooltip"])?>
+                <?php endif;?>
+                    <?= Html::a('<i class="icon icon-eye"></i>', ['catalog/quickview', 'id' => $model->id, 'returnUrl' => Url::current([],true)],
                     ['class' => 'awe-button product-quick-view', 'data-toggle' => "tooltip", 'title' => "Подробнее"])?>
             </div>
         </div><!-- /.product-hover -->
@@ -39,7 +41,7 @@ use yii\helpers\Url;
             <a href="#" title="<?= Html::encode($model->title) ?>"><?= Html::encode($model->title) ?></a>
         </h2><!-- /.product-product -->
         <div class="product-category">
-            <span><?= $category->title?></span>
+            <span><?= $model->category->title?></span>
         </div><!-- /.product-category -->
         <div class="product-price">
             <span class="amount"><?= (int)$model->price ?>₽</span>

@@ -39,60 +39,64 @@ $this->params['breadcrumbs'][] = $product->title;
         </div><!-- /.product-slider-wrapper -->
     </div>
     <div class="col-md-6">
-        <nav class="pnav">
-            <div class="pull-right">
-                <a href="#" class="btn btn-sm btn-arrow btn-default">
-                    <i class="fa fa-chevron-left"></i>
-                </a>
-                <a href="#" class="btn btn-sm btn-arrow btn-default">
-                    <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-            <a href="/catalog/<?=$category->slug?>" class="back-to-pcate">
-                <i class="fa fa-chevron-left"></i>
-                <span>Обратно к разделу <?=$category->title?></span>
-            </a>
-        </nav><!-- /header -->
+<!--        <nav class="pnav">-->
+<!--            <div class="pull-right">-->
+<!--                <a href="#" class="btn btn-sm btn-arrow btn-default">-->
+<!--                    <i class="fa fa-chevron-left"></i>-->
+<!--                </a>-->
+<!--                <a href="#" class="btn btn-sm btn-arrow btn-default">-->
+<!--                    <i class="fa fa-chevron-right"></i>-->
+<!--                </a>-->
+<!--            </div>-->
+<!--            <a href="/catalog/--><!--//=$category->slug?><!--" class="back-to-pcate">-->
+<!--                <i class="fa fa-chevron-left"></i>-->
+<!--                <span>Обратно к разделу --><!--//=$category->title?><!--</span>-->
+<!--            </a>-->
+<!--        </nav><!-- /header -->
         <div class="product-details-wrapper">
             <h2 class="product-name">
-                <a href="#" title=" Gin Lane Greenport Cotton Shirt"><?= $product->title?></a>
+                <?= $product->title?>
             </h2><!-- /.product-name -->
             <div class="product-status">
-                <span>В наличии</span>
+                <span><?php if($product->is_in_stock):?>В наличии<?php else:?>Отсутствует<?php endif;?></span>
                 <span>-</span>
-                <small>Арт: 12345678</small>
+                <small>Арт: <?= $product->article?></small>
             </div><!-- /.product-status -->
-            <div class="product-stars">
-                    <span class="rating">
-                        <span class="star"></span>
-                        <span class="star"></span>
-                        <span class="star"></span>
-                        <span class="star"></span>
-                        <span class="star"></span>
-                    </span>
-            </div><!-- /.product-stars -->
+<!--            <div class="product-stars">-->
+<!--                    <span class="rating">-->
+<!--                        <span class="star"></span>-->
+<!--                        <span class="star"></span>-->
+<!--                        <span class="star"></span>-->
+<!--                        <span class="star"></span>-->
+<!--                        <span class="star"></span>-->
+<!--                    </span>-->
+<!--            </div><!-- /.product-stars -->
             <div class="product-description">
                 <p><?= $product->description?></p>
             </div><!-- /.product-description -->
             <div class="product-actions-wrapper">
-                <form action="product-quick-view.html" method="POST">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="p_size">Размер</label>
-                                <select name="p_size" id="p_size" class="form-control">
-                                    <option value="">XL</option>
-                                </select>
+                <?php if($product->is_in_stock):?>
+                    <form action="product-quick-view.html" method="POST">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="p_size">Размер</label>
+                                    <select name="p_size" id="p_size" class="form-control">
+                                        <option value="">XL</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form><!-- /.form -->
+                    </form><!-- /.form -->
+                <?php endif;?>
                 <div class="product-list-actions">
                         <span class="product-price">
                             <span class="amount"><?= (int)$product->price?>₽</span>
                         </span><!-- /.product-price -->
-                    <?= Html::a('В корзину', ['cart/add', 'id' => $product->id], ['class' => 'btn btn-lg btn-primary'])?>
-                    <?= Html::a('Купить', ['cart/add', 'id' => $product->id, 'returnUrl' => '/cart/checkout'], ['class' => 'btn  btn-primary btn-lg btn-outline'])?>
+                    <?php if($product->is_in_stock):?>
+                        <?= Html::a('В корзину', ['cart/add', 'id' => $product->id], ['class' => 'btn btn-lg btn-primary'])?>
+                        <?= Html::a('Купить', ['cart/add', 'id' => $product->id, 'returnUrl' => '/cart/checkout'], ['class' => 'btn  btn-primary btn-lg btn-outline'])?>
+                    <?php endif;?>
                 </div><!-- /.product-list-actions -->
             </div><!-- /.product-actions-wrapper -->
             <div class="product-meta">
@@ -106,8 +110,8 @@ $this->params['breadcrumbs'][] = $product->title;
 </div>
 <div class="product-socials">
     <ul class="list-socials">
-        <li><a href="#" data-toggle="tooltip" title="Facebook"><i class="icon fa fa-instagram"></i></a></li>
-        <li><a href="#" data-toggle="tooltip" title="Facebook"><i class="icon fa fa-vk"></i></a></li>
+        <li><a href="#" data-toggle="tooltip" title="Instagram"><i class="icon fa fa-instagram"></i></a></li>
+        <li><a href="#" data-toggle="tooltip" title="Vk"><i class="icon fa fa-vk"></i></a></li>
         <li><a href="#" data-toggle="tooltip" title="Facebook"><i class="icon icon-facebook"></i></a></li>
     </ul>
 </div><!-- /.product-socials -->
@@ -128,11 +132,11 @@ $this->params['breadcrumbs'][] = $product->title;
                 <ul>
                     <li>
                         <span>Цвет</span>
-                        <span class="value">Yellow, Brown</span>
+                        <span class="value"><?= $product->color?></span>
                     </li>
                     <li>
                         <span>Состав</span>
-                        <span class="value">Nylon, Coton</span>
+                        <span class="value"><?= $product->structure?></span>
                     </li>
                 </ul>
             </div><!-- /.tab-pane -->

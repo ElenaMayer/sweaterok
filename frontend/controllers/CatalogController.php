@@ -25,7 +25,7 @@ class CatalogController extends \yii\web\Controller
         /** @var Category $category */
         $category = null;
 
-        $categories = Category::find()->indexBy('id')->orderBy('id')->all();
+        $categories = Category::find()->where(['is_active' => 1])->indexBy('id')->orderBy('id')->all();
 
         $productsQuery = Product::find();
 
@@ -34,6 +34,8 @@ class CatalogController extends \yii\web\Controller
         }
         if ($category) {
             $productsQuery->where(['category_id' => $this->getCategoryIds($categories, $category->id)]);
+        } elseif($slug == 'novelty'){
+            $productsQuery->where(['is_novelty' => 1]);
         }
 
         $productsDataProvider = new ActiveDataProvider([
@@ -44,8 +46,8 @@ class CatalogController extends \yii\web\Controller
         ]);
 
         return $this->render('list', [
-            'category' => $category,
-            'menuItems' => $this->getMenuItems($categories, isset($category->id) ? $category->id : null),
+            'category' => isset($category)? $category : null,
+            'menuItems' => $this->getMenuItems($categories, isset($category->id) ? $category->id : 'novelty'),
             'models' => $productsDataProvider->getModels(),
             'pagination' => $productsDataProvider->getPagination(),
             'pageCount' => $productsDataProvider->getCount(),
@@ -58,6 +60,7 @@ class CatalogController extends \yii\web\Controller
         $product = Product::find()->where(['id' => $productId])->one();
         $relatedProducts = Product::find()
             ->where('id != :id', ['id'=>$productId])
+            ->andWhere(['is_active' => 1, 'is_in_stock' => 1])
             ->limit(Yii::$app->params['productPageRelatedCount'])
             ->all();
 
@@ -97,7 +100,14 @@ class CatalogController extends \yii\web\Controller
                 ];
             }
         }
-        return $menuItems;
+        if(!$parent){
+            $menuItems['novelty'] = [
+                'active' => $activeId == 'novelty',
+                'label' => 'Новинки',
+                'url' => ['catalog/novelty'],
+            ];
+            return $menuItems;
+        }
     }
 
     /**

@@ -63,9 +63,21 @@ class ProductController extends Controller
     {
         $categories = Category::find()->all();
         $model = new Product();
+        $model->is_active = 1;
+        $model->is_in_stock = 1;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if($post = Yii::$app->request->post()) {
+            if (is_array($post['Product']['color'])) {
+                $model->color = implode(",", $post['Product']['color']);
+            }
+            if ($model->load($post) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                    'categories' => $categories,
+                ]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,10 +96,21 @@ class ProductController extends Controller
     {
         $categories = Category::find()->all();
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if($post = Yii::$app->request->post()){
+            if (is_array($post['Product']['color']))
+            {
+                $model->color = implode(",",$post['Product']['color']);
+            }
+            if ($model->load($post) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                    'categories' => $categories,
+                ]);
+            }
         } else {
+            $model->color = !empty($model->color)?explode(",",$model->color):[];
             return $this->render('update', [
                 'model' => $model,
                 'categories' => $categories,

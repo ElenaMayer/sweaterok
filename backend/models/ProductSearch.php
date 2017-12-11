@@ -18,8 +18,8 @@ class ProductSearch extends Product
     public function rules()
     {
         return [
-            [['id', 'category_id'], 'integer'],
-            [['title', 'description'], 'safe'],
+            [['id', 'category_id', 'is_in_stock', 'is_active', 'is_novelty'], 'integer'],
+            [['title', 'slug', 'description', 'article', 'sex', 'color', 'structure', 'time'], 'safe'],
             [['price'], 'number'],
         ];
     }
@@ -44,22 +44,38 @@ class ProductSearch extends Product
     {
         $query = Product::find();
 
+        // add conditions that should always apply here
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        if (!($this->load($params) && $this->validate())) {
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'category_id' => $this->category_id,
             'price' => $this->price,
+            'is_in_stock' => $this->is_in_stock,
+            'is_active' => $this->is_active,
+            'is_novelty' => $this->is_novelty,
+            'time' => $this->time,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'slug', $this->slug])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'article', $this->article])
+            ->andFilterWhere(['like', 'sex', $this->sex])
+            ->andFilterWhere(['like', 'color', $this->color])
+            ->andFilterWhere(['like', 'structure', $this->structure]);
 
         return $dataProvider;
     }

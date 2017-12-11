@@ -71,11 +71,6 @@ MyAppAsset::register($this);
                                             <li>
                                                 <div class="container-fluid">
                                                     <div class="header-account">
-                                                        <div class="header-account-avatar">
-                                                            <a href="#" title="">
-                                                                <img src="/img/samples/avatars/customers/1.jpg" alt="" class="img-circle">
-                                                            </a>
-                                                        </div>
                                                         <div class="header-account-username">
                                                             <h4><a href="#"><?= Yii::$app->user->identity->username ?></a></h4>
                                                         </div>
@@ -91,20 +86,24 @@ MyAppAsset::register($this);
                                     <?php endif;?>
                                 </li>
                                 <li class="menubar-cart">
-                                    <a href="/cart/checkout" title="Корзина" class="awemenu-icon menu-shopping-cart">
-                                        <i class="icon icon-shopping-bag"></i>
-                                        <span class="awe-hidden-text">Корзина</span>
-                                        <?php /* @var $cart ShoppingCart */
-                                        $cart = Yii::$app->cart;
+                                    <?php /* @var $cart ShoppingCart */
+                                    $cart = Yii::$app->cart;
 
-                                        $products = $cart->getPositions();
-                                        $itemsInCart = $cart->getCount();
-                                        ?>
-                                        <?php if($itemsInCart): ?>
+                                    $products = $cart->getPositions();
+                                    $itemsInCart = $cart->getCount();
+                                    ?>
+                                    <?php if($itemsInCart): ?>
+                                        <a href="/cart/checkout" title="Корзина" class="awemenu-icon menu-shopping-cart">
+                                            <i class="icon icon-shopping-bag"></i>
+                                            <span class="awe-hidden-text">Корзина</span>
                                             <?php $itemsInCart = Yii::$app->cart->getCount(); ?>
                                             <span class="cart-number"><?= $itemsInCart ?></span>
-                                        <?php endif;?>
-                                    </a>
+                                        </a>
+                                    <?php else:?>
+                                        <a href="#" title="Корзина" class="awemenu-icon menu-shopping-cart">
+                                            <i class="icon icon-shopping-bag"></i>
+                                        </a>
+                                    <?php endif;?>
                                     <?php if($itemsInCart): ?>
                                         <ul class="submenu megamenu">
                                         <li>
@@ -170,8 +169,7 @@ MyAppAsset::register($this);
                         </div><!-- /.awe-logo -->
                         <ul class="awemenu awemenu-right">
                             <?php
-                            //$categories = \common\models\Category::find()->where(['is_active' => 1])->all();
-                            $categories = \common\models\Category::find()->all();
+                            $categories = \common\models\Category::find()->where(['is_active' => 1])->all();
                             ?>
                             <?php foreach ($categories as $category): ?>
                                 <li class="awemenu-item">

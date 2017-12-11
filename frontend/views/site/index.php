@@ -125,7 +125,10 @@ $this->title = Yii::$app->params['title'];
                         <div class="col-md-9 col-sm-8">
                             <div class="products owl-carousel" data-items="3">
                                 <?php
-                                $models = Product::find()->where(['category_id'=>$category->id])->limit(Yii::$app->params['indexPageProductCount'])->all();
+                                $models = Product::find()
+                                    ->where(['category_id'=>$category->id, 'is_active' => 1, 'is_in_stock' => 1])
+                                    ->limit(Yii::$app->params['indexPageProductCount'])
+                                    ->all();
                                 ?>
                                 <?php foreach (array_values($models) as $index => $model) :?>
                                     <?= $this->render('../catalog/_product', ['model'=>$model, 'category' => $category]); ?>
@@ -138,35 +141,35 @@ $this->title = Yii::$app->params['title'];
         </div><!-- /.container -->
     </section><!-- /section -->
 
-    <section>
-        <div class="container">
-            <div class="margin-bottom-50">
-                <div class="subscible-wrapper subscible-inline">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h3 class="subscribe-title">Подписка на новости</h3>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="subscribe-comment">
-                                <p>Будьте в курсе последнихновинок и наших акций</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <form method="GET" action="index.html" class="subscible-form">
-                                <div class="form-group">
-                                    <label class="sr-only" for="subscribe-email">Email</label>
-                                    <input type="email" placeholder="Введите ваш Email" class="form-control" id="subscribe-email">
-                                </div>
-                                <div class="form-submit">
-                                    <button class="btn btn-lg btn-primary" type="submit">Подписаться</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div><!-- /.subscible-wrapper -->
-            </div>
-        </div><!-- /.container -->
-    </section><!-- /section -->
+<!--    <section>-->
+<!--        <div class="container">-->
+<!--            <div class="margin-bottom-50">-->
+<!--                <div class="subscible-wrapper subscible-inline">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-2">-->
+<!--                            <h3 class="subscribe-title">Подписка на новости</h3>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-4">-->
+<!--                            <div class="subscribe-comment">-->
+<!--                                <p>Будьте в курсе последнихновинок и наших акций</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6">-->
+<!--                            <form method="GET" action="index.html" class="subscible-form">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label class="sr-only" for="subscribe-email">Email</label>-->
+<!--                                    <input type="email" placeholder="Введите ваш Email" class="form-control" id="subscribe-email">-->
+<!--                                </div>-->
+<!--                                <div class="form-submit">-->
+<!--                                    <button class="btn btn-lg btn-primary" type="submit">Подписаться</button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div><!-- /.subscible-wrapper -->
+<!--            </div>-->
+<!--        </div><!-- /.container -->
+<!--    </section><!-- /section -->
 
     <section>
         <div class="container">

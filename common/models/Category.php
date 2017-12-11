@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use Yii;
 use yii\behaviors\SluggableBehavior;
 
 /**
@@ -12,6 +11,10 @@ use yii\behaviors\SluggableBehavior;
  * @property integer $parent_id
  * @property string $title
  * @property string $slug
+ * @property integer $is_active
+ * @property string $description
+ * @property string $image
+ * @property string $time
  *
  * @property Category $parent
  * @property Category[] $categories
@@ -19,6 +22,14 @@ use yii\behaviors\SluggableBehavior;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'category';
+    }
+
     public function behaviors()
     {
         return [
@@ -33,20 +44,14 @@ class Category extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
-        return 'category';
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
-            [['parent_id'], 'default', 'value' => null],
-            [['parent_id'], 'integer'],
-            [['title'], 'string', 'max' => 255],
+            [['description'], 'string'],
+            [['parent_id', 'is_active'], 'integer'],
+            [['time'], 'safe'],
+            [['title', 'slug', 'image'], 'string', 'max' => 255],
+            [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],
         ];
     }
 
@@ -57,9 +62,13 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent_id' => 'Parent',
-            'title' => 'Title',
+            'parent_id' => 'Parent ID',
+            'title' => 'Название',
             'slug' => 'Slug',
+            'is_active' => 'Показывать',
+            'description' => 'Описание',
+            'image' => 'Картинка',
+            'time' => 'Time',
         ];
     }
 
