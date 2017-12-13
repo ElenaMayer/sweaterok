@@ -184,12 +184,12 @@ MyAppAsset::register($this);
                                 </a>
                             </li>
                             <li class="awemenu-item">
-                                <a href="#" title="Доставка">
+                                <a href="/site/shipping" title="Доставка">
                                     <span>Доставка</span>
                                 </a>
                             </li>
                             <li class="awemenu-item">
-                                <a href="#" title="Оплата">
+                                <a href="/site/payment" title="Оплата">
                                     <span>Оплата</span>
                                 </a>
                             </li>
@@ -203,31 +203,32 @@ MyAppAsset::register($this);
                 </div><!-- /.container -->
             </nav><!-- /.awe-menubar -->
         </header><!-- /.awe-menubar-header -->
-
         <div id="main">
-            <div class="main-header background background-image-heading-products">
-                <div class="container">
-                    <h1>
-                        <?php
-                        if(isset($this->params['breadcrumbs'][0])){
-                            if(is_array($this->params['breadcrumbs'][0])){
-                                if (isset($this->params['breadcrumbs'][0]['label']))
-                                    echo $this->params['breadcrumbs'][0]['label'];
-                            } else {
-                                echo $this->params['breadcrumbs'][0];
+            <?php if(!($this->context->action->id == 'index')): ?>
+                <div class="main-header background background-image-heading-products <?= $this->context->action->id ?>">
+                    <div class="container">
+                        <h1>
+                            <?php
+                            if(isset($this->params['breadcrumbs'][0])){
+                                if(is_array($this->params['breadcrumbs'][0])){
+                                    if (isset($this->params['breadcrumbs'][0]['label']))
+                                        echo $this->params['breadcrumbs'][0]['label'];
+                                } else {
+                                    echo $this->params['breadcrumbs'][0];
+                                }
                             }
-                        }
-                        ?>
-                    </h1>
+                            ?>
+                        </h1>
+                    </div>
                 </div>
-            </div>
-            <div id="breadcrumb">
-                <div class="container">
-                    <?= Breadcrumbs::widget([
-                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                    ]) ?>
+                <div id="breadcrumb">
+                    <div class="container">
+                        <?= Breadcrumbs::widget([
+                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                        ]) ?>
+                    </div>
                 </div>
-            </div>
+            <?php endif;?>
 
         <div class="container">
             <?= Alert::widget() ?>
@@ -270,8 +271,8 @@ MyAppAsset::register($this);
                                 <h3 class="widget-title">Доставка</h3>
                                 <ul>
                                     <li><a href="/cart/checkout" title="Корзина">Корзина</a></li>
-                                    <li><a href="#" title="">Доставка</a></li>
-                                    <li><a href="#" title="">Оплата</a></li>
+                                    <li><a href="/site/shipping" title="Доставка">Доставка</a></li>
+                                    <li><a href="/site/payment" title="Оплата">Оплата</a></li>
                                     <li><a href="#" title="">Возврат</a></li>
                                     <li><a href="#" title="">Ваши заказы</a></li>
                                 </ul>

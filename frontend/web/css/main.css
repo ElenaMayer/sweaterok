@@ -2879,8 +2879,15 @@ img {
   margin-right: 10px;
 }
 
-.square .color.active, .square .color.current, .square .color:hover, .square .color:active {
+.square .color.active,
+.square .color.current,
+.square .color:hover,
+.square .color:active {
   border: solid 1px #000;
+}
+
+.shop-widgets-filters .square .color.active {
+  border: solid 2px #ffa200;
 }
 
 .dots .color {
@@ -4278,6 +4285,10 @@ h2.entry-title {
 
 .product {
   margin-bottom: 50px;
+}
+
+.background.product {
+  margin-bottom: 0;
 }
 
 .product-name {

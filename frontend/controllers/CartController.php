@@ -62,17 +62,17 @@ class CartController extends \yii\web\Controller
                 $orderItem->quantity = $product->getQuantity();
                 if (!$orderItem->save(false)) {
                     $transaction->rollBack();
-                    \Yii::$app->session->addFlash('error', 'Cannot place your order. Please contact us.');
-                    return $this->redirect('catalog/list');
+                    \Yii::$app->session->addFlash('error', 'Невозможно создать заказ. Пожалуйста свяжитесь с нами.');
+                    return $this->redirect('/catalog/list');
                 }
             }
 
             $transaction->commit();
             \Yii::$app->cart->removeAll();
 
-            \Yii::$app->session->addFlash('success', 'Thanks for your order. We\'ll contact you soon.');
+            \Yii::$app->session->addFlash('success', 'Спасибо за заказ! Мы скоро свяжемся с Вами.');
             $order->sendEmail();
-            return $this->redirect('catalog/list');
+            return $this->redirect('/catalog/list');
         }
 
         return $this->render('checkout', [

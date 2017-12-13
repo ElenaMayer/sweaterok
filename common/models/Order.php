@@ -50,7 +50,7 @@ class Order extends \yii\db\ActiveRecord
         return [
             [['phone', 'fio'], 'required'],
             [['notes'], 'string'],
-            [['phone', 'email, fio'], 'string', 'max' => 255],
+            [['phone', 'email', 'fio'], 'string', 'max' => 255],
             [['email'], 'email'],
         ];
     }
@@ -69,7 +69,7 @@ class Order extends \yii\db\ActiveRecord
             'email' => 'Email',
             'notes' => 'Комментарий',
             'status' => 'Статус',
-            'fio' => 'Фамилия',
+            'fio' => 'ФИО',
         ];
     }
 

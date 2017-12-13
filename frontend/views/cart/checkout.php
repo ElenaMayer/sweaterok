@@ -25,20 +25,14 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
         ]);
         $labels = $order->attributeLabels(); ?>
 
-        <div class="form-group">
-            <label for="address">ФИО <sup>*</sup></label>
-            <input type="text" class="form-control dark" id="fio" placeholder="Адрес">
-        </div><!-- /.form-group -->
-        <div class="form-group">
-            <label for="address">Адрес <sup>*</sup></label>
-            <input type="text" class="form-control dark" id="address" placeholder="Адрес">
-        </div><!-- /.form-group -->
+        <?= $form->field($order, 'fio')->textInput(['placeholder' => 'Иванов Иван Иванович', 'class' => 'form-control dark']); ?>
+        <?= $form->field($order, 'address')->textInput(['placeholder' => '630000, Новосибирск, ул.Ленина д.1 кв.1', 'class' => 'form-control dark']); ?>
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($order, 'email')->textInput(['placeholder' => $labels['email'], 'class' => 'form-control dark']); ?>
+                <?= $form->field($order, 'email')->textInput(['placeholder' => 'name@mail.ru', 'class' => 'form-control dark']); ?>
             </div>
             <div class="col-md-6">
-                <?= $form->field($order, 'phone')->textInput(['placeholder' => $labels['phone'], 'class' => 'form-control dark']); ?>
+                <?= $form->field($order, 'phone')->textInput(['placeholder' => '+7900-000-00-00', 'class' => 'form-control dark']); ?>
             </div>
         </div>
         <?= $form->field($order, 'notes')->textarea(['class' => 'form-control dark', 'rows' => "3"]); ?>
