@@ -13,6 +13,7 @@ use Yii;
  * @property string $price
  * @property integer $product_id
  * @property double $quantity
+ * @property string $size
  *
  * @property Product $product
  * @property Order $order
@@ -47,6 +48,7 @@ class OrderItem extends \yii\db\ActiveRecord
             'order_id' => 'Order ID',
             'title' => 'Title',
             'price' => 'Price',
+            'size' => 'Size',
             'product_id' => 'Product ID',
             'quantity' => 'Quantity',
         ];

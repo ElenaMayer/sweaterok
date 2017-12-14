@@ -37,7 +37,19 @@ use kartik\select2\Select2;
             'multiple' => true,
             'placeholder' => Yii::t('app','Выберите цвет ...'),
         ],
-        'data'=>$model->getColors(),
+        'data'=>$model->getColorsArray(),
+        'pluginOptions' => [
+            'tags' => true,
+            'tokenSeparators'=>[',',' '],
+        ],
+    ]) ?>
+
+    <?= $form->field($model, 'sizes')->widget(Select2::classname(), [
+        'options' => [
+            'multiple' => true,
+            'placeholder' => Yii::t('app','Выберите размер ...'),
+        ],
+        'data'=>$model->getSizesArray(),
         'pluginOptions' => [
             'tags' => true,
             'tokenSeparators'=>[',',' '],

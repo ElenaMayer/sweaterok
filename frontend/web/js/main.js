@@ -244,3 +244,25 @@ function aweProductRender(thumbHorizontal) {
     sMain.params.control = sThumb;
     sThumb.params.control = sMain;
 }
+
+function editAddCartButtonOnSizeChange() {
+    $( "#p_size" ).on( "change", function() {
+        var size = $( this ).val();
+        var id = $( '.product-list-actions' ).data("id");
+        var url = '/cart/add?id=' + id + '&size=' + size;
+        $( $( '.product-list-actions' ).children('a') ).each(function( index ) {
+            $( this ).attr("href", url);
+        });
+    });
+}
+
+function showSizesOnCartButtonClick() {
+    $( ".product-buy" ).on( "click", function() {
+        $( this).parent('.product-actions').hide();
+        $( this).parents('.product-hover').children('.product-buy-sizes').show();
+    });
+    $( ".product-add-cart" ).on( "click", function() {
+        $( this).parent('.product-actions').hide();
+        $( this).parents('.product-hover').children('.product-cart-sizes').show();
+    });
+}

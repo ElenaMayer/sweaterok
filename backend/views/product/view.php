@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'is_active',
             'is_novelty',
             'color',
+            'sizes',
             'structure',
             'time',
         ],

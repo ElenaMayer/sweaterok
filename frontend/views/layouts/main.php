@@ -89,7 +89,7 @@ MyAppAsset::register($this);
                                     <?php /* @var $cart ShoppingCart */
                                     $cart = Yii::$app->cart;
 
-                                    $products = $cart->getPositions();
+                                    $positions = $cart->getPositions();
                                     $itemsInCart = $cart->getCount();
                                     ?>
                                     <?php if($itemsInCart): ?>
@@ -109,10 +109,12 @@ MyAppAsset::register($this);
                                         <li>
                                             <div class="container-fluid">
                                                 <ul class="whishlist">
-                                                    <?php foreach ($products as $product):?>
+                                                    <?php foreach ($positions as $p):?>
+                                                        <?php $product = $p->getProduct(); ?>
                                                         <li>
                                                         <div class="whishlist-item">
                                                             <div class="product-image">
+<!--                                                                --><?php //print_r($product);die();?>
                                                                 <a href="<?= $product->images[0]->getUrl()?>" title="<?= Html::encode($product->title)?>">
                                                                     <?= Html::img($product->images[0]->getUrl(), ['width' => '100%', 'alt'=>$product->title]);?>
                                                                 </a>
@@ -123,21 +125,21 @@ MyAppAsset::register($this);
                                                                 </div>
                                                                 <div class="whishlist-size">
                                                                     <span>Размер:</span>
-                                                                    <strong>42</strong>
+                                                                    <strong><?=$p->size?></strong>
                                                                 </div>
-                                                                <?php if($quantity = $product->getQuantity() > 1):?>
+                                                                <?php if($quantity = $p->getQuantity() > 1):?>
                                                                     <div class="whishlist-quantity">
                                                                         <span>Количество:</span>
-                                                                        <span><?=$product->getQuantity()?></span>
+                                                                        <span><?=$p->getQuantity()?></span>
                                                                     </div>
                                                                 <?php endif;?>
                                                                 <div class="whishlist-price">
                                                                     <span>Стоимость:</span>
-                                                                    <strong><?= (int)$product->getCost()?>₽</strong>
+                                                                    <strong><?= (int)$p->getCost()?>₽</strong>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <?= Html::a('<span class="icon icon-remove"></span>', ['cart/remove', 'id' => $product->getId()], ['class' => 'remove-cart', 'title' => "Удалить"])?>
+                                                        <?= Html::a('<span class="icon icon-remove"></span>', ['cart/remove', 'id' => $product->id, 'size' => $p->size], ['class' => 'remove-cart', 'title' => "Удалить"])?>
                                                     </li>
                                                     <?php endforeach ?>
                                                 </ul>

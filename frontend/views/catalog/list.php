@@ -1,7 +1,7 @@
 <?php
 use yii\widgets\LinkPager;
 use yii\widgets\Menu;
-use \yii\helpers\Html;
+use common\models\Product;
 
 if($category) {
     $this->title = Yii::$app->params['title'] . ' - ' . $category->title;
@@ -89,10 +89,10 @@ if($category) {
                         <label class="label-select">
                             <select name="product-sizes" class="form-control"  onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
                                 <option value="<?= $this->addGetParamToCurrentUrl('size', 'all') ?>" <?php if(!Yii::$app->request->get('size') || Yii::$app->request->get('size') == 'all'):?>selected="selected"<?php endif;?>>Все</option>
-                                <option value="<?= $this->addGetParamToCurrentUrl('size', '42') ?>" <?php if(Yii::$app->request->get('size') && Yii::$app->request->get('size') == '42'):?>selected="selected"<?php endif;?>>42</option>
-                                <option value="<?= $this->addGetParamToCurrentUrl('size', '44') ?>" <?php if(Yii::$app->request->get('size') && Yii::$app->request->get('size') == '44'):?>selected="selected"<?php endif;?>>44</option>
-                                <option value="<?= $this->addGetParamToCurrentUrl('size', '46') ?>" <?php if(Yii::$app->request->get('size') && Yii::$app->request->get('size') == '46'):?>selected="selected"<?php endif;?>>46</option>
-                                <option value="<?= $this->addGetParamToCurrentUrl('size', '48') ?>" <?php if(Yii::$app->request->get('size') && Yii::$app->request->get('size') == '48'):?>selected="selected"<?php endif;?>>48</option>
+                                <?php $model = new Product;?>
+                                <?php foreach ($model->getSizesArray() as $size):?>
+                                    <option value="<?= $this->addGetParamToCurrentUrl('size', $size) ?>" <?php if(Yii::$app->request->get('size') && Yii::$app->request->get('size') == $size):?>selected="selected"<?php endif;?>><?=$size?></option>
+                                <?php endforeach;?>
                             </select>
                         </label>
                     </div>

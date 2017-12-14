@@ -82,20 +82,23 @@ $this->params['breadcrumbs'][] = $product->title;
                                 <div class="form-group">
                                     <label for="p_size">Размер</label>
                                     <select name="p_size" id="p_size" class="form-control">
-                                        <option value="">XL</option>
+                                        <?php $sizes = explode(',', $product->sizes);?>
+                                        <?php foreach ($sizes as $size):?>
+                                            <option value="<?= $size?>"><?= $size?></option>
+                                        <?php endforeach;?>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </form><!-- /.form -->
                 <?php endif;?>
-                <div class="product-list-actions">
+                <div class="product-list-actions" data-id="<?= $product->id ?>">
                         <span class="product-price">
                             <span class="amount"><?= (int)$product->price?>₽</span>
                         </span><!-- /.product-price -->
                     <?php if($product->is_in_stock):?>
-                        <?= Html::a('В корзину', ['cart/add', 'id' => $product->id], ['class' => 'btn btn-lg btn-primary'])?>
-                        <?= Html::a('Купить', ['cart/add', 'id' => $product->id, 'returnUrl' => '/cart/checkout'], ['class' => 'btn  btn-primary btn-lg btn-outline'])?>
+                        <?= Html::a('В корзину', ['cart/add', 'id' => $product->id, 'size' => array_shift($sizes)], ['class' => 'btn btn-lg btn-primary'])?>
+                        <?= Html::a('Купить', ['cart/add', 'id' => $product->id, 'size' => array_shift($sizes), 'returnUrl' => '/cart/checkout'], ['class' => 'btn  btn-primary btn-lg btn-outline'])?>
                     <?php endif;?>
                 </div><!-- /.product-list-actions -->
             </div><!-- /.product-actions-wrapper -->
@@ -154,3 +157,7 @@ $this->params['breadcrumbs'][] = $product->title;
         <?php endforeach;?>
     </div>
 </div><!-- /.related-products -->
+
+<script>
+    $(function() { editAddCartButtonOnSizeChange(); });
+</script>

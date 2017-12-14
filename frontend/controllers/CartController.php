@@ -10,11 +10,13 @@ use Yii;
 
 class CartController extends \yii\web\Controller
 {
-    public function actionAdd($id, $returnUrl = null)
+    public function actionAdd($id, $size, $returnUrl = null)
     {
         $product = Product::findOne($id);
         if ($product) {
-            \Yii::$app->cart->put($product);
+            $position = $product->getCartPosition();
+            $position->size = $size;
+            \Yii::$app->cart->put($position);
             if($returnUrl)
                 return Yii::$app->getResponse()->redirect($returnUrl);
             else
@@ -22,19 +24,23 @@ class CartController extends \yii\web\Controller
         }
     }
 
-    public function actionRemove($id)
+    public function actionRemove($id, $size)
     {
         $product = Product::findOne($id);
         if ($product) {
-            \Yii::$app->cart->remove($product);
+            $position = $product->getCartPosition();
+            $position->size = $size;
+            \Yii::$app->cart->remove($position);
             $this->redirect(['cart/checkout']);
         }
     }
 
-    public function actionUpdate($id, $quantity)
+    public function actionUpdate($id, $size, $quantity)
     {
         $product = Product::findOne($id);
         if ($product) {
+            $position = $product->getCartPosition();
+            $position->size = $size;
             \Yii::$app->cart->update($product, $quantity);
             $this->redirect(['cart/checkout']);
         }

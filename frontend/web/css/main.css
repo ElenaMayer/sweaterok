@@ -4308,11 +4308,13 @@ h2.entry-title {
 }
 
 .payment-detail-wrapper .product-price,
-.payment-detail-wrapper .product-count {
+.payment-detail-wrapper .product-count,
+.payment-detail-wrapper .product-size {
   display: inline;
 }
 
-.payment-detail-wrapper .product-count {
+.payment-detail-wrapper .product-count,
+.payment-detail-wrapper .product-size {
   padding-right: 10px;
 }
 
@@ -4411,13 +4413,19 @@ h2.entry-title {
   bottom: 0;
 }
 
-.product-actions {
+.product-actions,
+.product-sizes {
   background-color: #ffffff;
   padding: 20px 0;
   margin: 0 15px 20px;
   text-align: center;
   -webkit-box-shadow: 2px 4px 5px 0px rgba(0, 0, 0, 0.09);
   box-shadow: 2px 4px 5px 0px rgba(0, 0, 0, 0.09);
+}
+
+.product-sizes a {
+  display: inline;
+  padding: 0 7px;
 }
 
 .product-actions > .awe-button,
@@ -4428,6 +4436,7 @@ h2.entry-title {
   padding: 0 20px;
   border-left: solid 1px #ddd;
   display: inline-block;
+  cursor: pointer;
 }
 
 .product-actions > .awe-button:first-child,

@@ -52,7 +52,8 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
 
             <div class="payment-detail-wrapper">
                 <ul class="cart-list">
-                    <?php foreach ($products as $product):?>
+                    <?php foreach ($products as $p):?>
+                        <?php $product = $p->getProduct(); ?>
                     <li>
                         <div class="cart-item">
                             <div class="product-image">
@@ -63,21 +64,24 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
                             <div class="product-body">
                                 <div class="product-name">
                                     <h3>
-                                        <a href="/catalog/<?= $product->category->slug?>/<?= $product->id?>" title="<?= $product->price?>"><?= Html::encode($product->title)?></a>
+                                        <a href="/catalog/<?= $product->category->slug?>/<?= $product->id?>" title="<?= $p->price?>"><?= Html::encode($product->title)?></a>
                                     </h3>
                                 </div>
+                                <div class="product-size">
+                                    <span><?= $p->size?>рр</span>
+                                </div>
                                 <div class="product-count">
-                                    <?php $quantity = $product->getQuantity()?>
-                                    <!-- Html::a('-', ['cart/update', 'id' => $product->getId(), 'quantity' => $quantity - 1], ['class' => 'btn', 'disabled' => ($quantity - 1) < 1])-->
+                                    <?php $quantity = $p->getQuantity()?>
+                                    <!-- Html::a('-', ['cart/update', 'id' => $product->getId(), 'size' => $p->size, 'quantity' => $quantity - 1], ['class' => 'btn', 'disabled' => ($quantity - 1) < 1])-->
                                     <span><?= $quantity?>шт.</span>
-                                    <!-- Html::a('+', ['cart/update', 'id' => $product->getId(), 'quantity' => $quantity + 1], ['class' => 'btn'])-->
+                                    <!-- Html::a('+', ['cart/update', 'id' => $product->getId(), 'size' => $p->size, 'quantity' => $quantity + 1], ['class' => 'btn'])-->
                                 </div>
                                 <div class="product-price">
-                                    <span><?= (int)$product->getCost()?>₽</span>
+                                    <span><?= (int)$p->getCost()?>₽</span>
                                 </div>
                             </div>
                         </div><!-- /.cart-item -->
-                        <?= Html::a('<span class="icon icon-remove"></span>', ['cart/remove', 'id' => $product->getId()], ['class' => 'remove-cart', 'title' => "Удалить"])?>
+                        <?= Html::a('<span class="icon icon-remove"></span>', ['cart/remove', 'id' => $product->getId(), 'size' => $p->size], ['class' => 'remove-cart', 'title' => "Удалить"])?>
                     </li>
                     <?php endforeach ?>
                 </ul> <!-- /.cart-list -->

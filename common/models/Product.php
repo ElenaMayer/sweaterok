@@ -5,6 +5,7 @@ namespace common\models;
 use yii\behaviors\SluggableBehavior;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
+use Yii;
 
 /**
  * This is the model class for table "product".
@@ -21,6 +22,7 @@ use yz\shoppingcart\CartPositionTrait;
  * @property integer $is_active
  * @property integer $is_novelty
  * @property string $color
+ * @property string $sizes
  * @property string $structure
  * @property string $time
  *
@@ -35,6 +37,8 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
     /**
      * @inheritdoc
      */
+
+    public $size;
 
     public static function tableName()
     {
@@ -60,7 +64,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
             [['description'], 'string'],
             [['category_id', 'is_in_stock', 'is_active', 'is_novelty'], 'integer'],
             [['price'], 'number'],
-            [['time, color'], 'safe'],
+            [['time, color, sizes'], 'safe'],
             [['title', 'slug', 'article', 'sex', 'structure'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
@@ -83,7 +87,8 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
             'is_in_stock' => 'В наличии',
             'is_active' => 'Показывать',
             'is_novelty' => 'Новинка',
-            'color' => 'Цвет',
+            'color' => 'Цвета',
+            'sizes' => 'Размеры',
             'structure' => 'Состав',
             'time' => 'Время создания',
         ];
@@ -137,7 +142,24 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
         return $this->id;
     }
 
-    public function getColors()
+    /**
+     * @inheritdoc
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    public function getCartPosition($params = [])
+    {
+        return Yii::createObject([
+            'class' => 'common\models\ProductCartPosition',
+            'id' => $this->id,
+            'color' => $this->color,
+        ]);
+    }
+
+    public function getColorsArray()
     {
         $models = $this->find()->all();
         $colors = [];
@@ -153,5 +175,24 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
             }
         }
         return $colors;
+    }
+
+    public function getSizesArray()
+    {
+        $models = $this->find()->all();
+        $sizes = [];
+        foreach ($models as $m)
+        {
+            $ss = explode(",",$m->sizes);
+            foreach ($ss as $s)
+            {
+                if ($s && !in_array($s,$sizes))
+                {
+                    $sizes[$s] = $s;
+                }
+            }
+        }
+        asort($sizes);
+        return $sizes;
     }
 }

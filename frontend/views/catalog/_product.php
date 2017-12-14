@@ -25,11 +25,22 @@ use yii\helpers\Url;
         <div class="product-hover">
             <div class="product-actions">
                 <?php if($model->is_in_stock):?>
-                    <?= Html::a('<i class="icon icon-box"></i>', ['cart/add', 'id' => $model->id, 'returnUrl' => '/cart/checkout'], ['class' => 'awe-button', 'title' => "Купить", 'data-toggle' => "tooltip"])?>
-                    <?= Html::a('<i class="icon icon-shopping-bag"></i>', ['cart/add', 'id' => $model->id], ['class' => 'awe-button product-add-cart', 'title' => "В корзину", 'data-toggle' => "tooltip"])?>
-                <?php endif;?>
+                    <span class="awe-button product-buy" title="Купить" data-toggle="tooltip"><i class="icon icon-box"></i></span>
+                    <span class="awe-button product-add-cart" title="В корзину" data-toggle="tooltip"><i class="icon icon-shopping-bag"></i></span>
+                    <?php endif;?>
                     <?= Html::a('<i class="icon icon-eye"></i>', ['catalog/quickview', 'id' => $model->id, 'returnUrl' => Url::current([],true)],
                     ['class' => 'awe-button product-quick-view', 'data-toggle' => "tooltip", 'title' => "Подробнее"])?>
+            </div>
+            <?php $sizes = explode(',', $model->sizes);?>
+            <div class="product-sizes product-cart-sizes" style="display: none">
+                <?php foreach ($sizes as $size):?>
+                    <?= Html::a($size, ['cart/add', 'id' => $model->id, 'size' => $size], ['class' => 'awe-button product-add-cart-size', 'data-toggle' => "tooltip"])?>
+                <?php endforeach;?>
+            </div>
+            <div class="product-sizes product-buy-sizes" style="display: none">
+                <?php foreach ($sizes as $size):?>
+                    <?= Html::a($size, ['cart/add', 'id' => $model->id, 'size' => $size, 'returnUrl' => '/cart/checkout'], ['class' => 'awe-button product-add-cart-size', 'data-toggle' => "tooltip"])?>
+                <?php endforeach;?>
             </div>
         </div><!-- /.product-hover -->
 <!--        <span class="product-label hot">-->
@@ -48,3 +59,7 @@ use yii\helpers\Url;
         </div><!-- /.product-price -->
     </div><!-- /.product-body -->
 </div><!-- /.product -->
+
+<script>
+    $(function() { showSizesOnCartButtonClick(); });
+</script>
