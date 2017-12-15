@@ -29,9 +29,10 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-//                'catalog/<id:\d+>' => 'catalog/list',
-            ],
+            'rules' => [],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
         ],
     ],
     'params' => $params,

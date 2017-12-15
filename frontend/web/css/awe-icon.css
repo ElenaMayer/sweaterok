@@ -24,6 +24,18 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.awe-page-loading .icon {
+    font-family: unset;
+    font-weight: 800;
+    margin-left: -45px;
+    font-size: 30px;
+    letter-spacing: 5px;
+}
+
+.awe-page-loading .icon-logo:before {
+    content: "SIBWEAR.RU";
+}
+
 .icon-logo-text:before {
     content: "\e637";
 }

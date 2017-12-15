@@ -10,8 +10,8 @@
   background-image: url("../img/backgrounds/heading-blog.jpg");
 }
 
-.background-image-heading-about-us {
-  background-image: url("../img/backgrounds/heading-about-us.jpg");
+.background-image-heading-products.about {
+  background-image: url("../img/backgrounds/heading-about-us.jpg?3");
 }
 
 .background-image-heading-contact {
@@ -22,8 +22,15 @@
   background-image: url("../img/backgrounds/heading-customers-say.jpg");
 }
 
-.background-image-heading-checkout {
+.background-image-heading-checkout,
+.background-image-heading-products.checkout {
   background-image: url("../img/backgrounds/heading-checkout.jpg");
+}
+
+.background-image-heading-products.resend,
+.background-image-heading-products.login,
+.background-image-heading-products.register {
+  background-image: url("../img/backgrounds/heading-auth.jpg");
 }
 
 .background-image-heading-products {
@@ -35,7 +42,7 @@
 }
 
 .background-image-heading-products.shipping {
-  background-image: url("../img/backgrounds/heading-shipping.jpg?1");
+  background-image: url("../img/backgrounds/heading-shipping.jpg?3");
 }
 
 .background-image-heading-products.payment {

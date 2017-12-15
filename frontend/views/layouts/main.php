@@ -22,6 +22,9 @@ MyAppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?= Html::encode($this->title) ?></title>
+    <?php $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/img/favicon-16x16.png', 'sizes' => '16x16']); ?>
+    <?php $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/img/favicon-32x32.png', 'sizes' => '32x32']); ?>
+    <?php $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => '/img/favicon-96x96.png', 'sizes' => '96x96']); ?>
     <?php $this->head() ?>
     <script>window.SHOW_LOADING = false;</script>
 </head>
@@ -53,7 +56,7 @@ MyAppAsset::register($this);
                         <div class="navbar-header">
                             <ul class="navbar-icons">
                                 <li class="menubar-account">
-                                    <a href="#" title="" class="awemenu-icon">
+                                    <a href="#" title="Аккаунт" class="awemenu-icon">
                                         <i class="icon icon-user-circle"></i>
                                         <span class="awe-hidden-text">Аккаунт</span>
                                     </a>
@@ -167,7 +170,7 @@ MyAppAsset::register($this);
                             </ul>
                         </div>
                         <div class="awe-logo">
-                            <a href="<?= Yii::$app->homeUrl ?>" title="Главная"><img src="/img/logo.png?1" alt=""></a>
+                            <a href="<?= Yii::$app->homeUrl ?>" title="Главная"><img src="/img/logo.png?2" alt=""></a>
                         </div><!-- /.awe-logo -->
                         <ul class="awemenu awemenu-right">
                             <?php

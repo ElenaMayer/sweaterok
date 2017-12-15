@@ -31,6 +31,10 @@ use yii\helpers\Url;
                     <?= Html::a('<i class="icon icon-eye"></i>', ['catalog/quickview', 'id' => $model->id, 'returnUrl' => Url::current([],true)],
                     ['class' => 'awe-button product-quick-view', 'data-toggle' => "tooltip", 'title' => "Подробнее"])?>
             </div>
+
+            <script>
+                $(function() { showSizesOnCartButtonClick(); });
+            </script>
             <?php $sizes = explode(',', $model->sizes);?>
             <div class="product-sizes product-cart-sizes" style="display: none">
                 <?php foreach ($sizes as $size):?>
@@ -59,7 +63,3 @@ use yii\helpers\Url;
         </div><!-- /.product-price -->
     </div><!-- /.product-body -->
 </div><!-- /.product -->
-
-<script>
-    $(function() { showSizesOnCartButtonClick(); });
-</script>

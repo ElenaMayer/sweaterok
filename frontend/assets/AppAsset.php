@@ -26,7 +26,7 @@ class AppAsset extends AssetBundle
         //build:css css/bootstrap.css
         "css/bootstrap.css",
         //build:css css/plugins.css
-        "css/awe-icon.css",
+        "css/awe-icon.css?1",
         "css/font-awesome.css",
         "css/magnific-popup.css",
         "css/owl.carousel.css",
@@ -35,7 +35,7 @@ class AppAsset extends AssetBundle
         "css/easyzoom.css",
         "css/nanoscroller.css",
         //build:css css/styles.css
-        "css/awe-background.css?2",
+        "css/awe-background.css?6",
         "css/main.css?13",
         "css/docs.css",
     ];
