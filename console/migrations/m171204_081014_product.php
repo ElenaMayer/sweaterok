@@ -29,7 +29,6 @@ class m171204_081014_product extends Migration
 
         $this->addColumn('{{%category}}', 'is_active',Schema::TYPE_BOOLEAN);
         $this->addColumn('{{%category}}', 'description',Schema::TYPE_STRING);
-        $this->addColumn('{{%category}}', 'image',Schema::TYPE_STRING);
         $this->addColumn('{{%category}}', 'time',Schema::TYPE_TIMESTAMP. ' NOT NULL DEFAULT NOW()');
 
         $this->addColumn('{{%order}}', 'fio',Schema::TYPE_STRING);

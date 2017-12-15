@@ -106,14 +106,14 @@ $this->title = Yii::$app->params['title'];
                             <div class="awe-media home-cate-media">
                                 <div class="awe-media-header">
                                     <div class="awe-media-image">
-                                        <img src="./img/samples/collections/index-1/clothing.jpg" alt="">
+                                        <img src="<?=$category->getImageUrl() ?>" alt="<?=$category->title ?>">
                                     </div><!-- /.awe-media-image -->
                                     <div class="awe-media-overlay overlay-dark-50 fullpage">
                                         <div class="content">
                                             <div class="fp-table text-left">
                                                 <div class="fp-table-cell">
                                                     <h2 class="upper"><?= $category->title ?></h2>
-                                                    <p class="margin-bottom-50">At vero eos et accusamus et iusto odio dignissimosmus voluptatum deleniti</p>
+                                                    <p class="margin-bottom-50"><?=$category->description ?></p>
                                                     <a href="/catalog/<?= $category->slug ?>" class="btn btn-sm btn-outline btn-white">Смотреть</a>
                                                 </div>
                                             </div>

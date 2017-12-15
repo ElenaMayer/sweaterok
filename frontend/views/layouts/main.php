@@ -117,7 +117,6 @@ MyAppAsset::register($this);
                                                         <li>
                                                         <div class="whishlist-item">
                                                             <div class="product-image">
-<!--                                                                --><?php //print_r($product);die();?>
                                                                 <a href="<?= $product->images[0]->getUrl()?>" title="<?= Html::encode($product->title)?>">
                                                                     <?= Html::img($product->images[0]->getUrl(), ['width' => '100%', 'alt'=>$product->title]);?>
                                                                 </a>

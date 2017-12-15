@@ -27,6 +27,9 @@ return [
         'cart' => [
             'class' => 'yz\shoppingcart\ShoppingCart',
         ],
+        'request' => [
+            'baseUrl' => '',
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
