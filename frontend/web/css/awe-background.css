@@ -14,6 +14,22 @@
   background-image: url("../img/backgrounds/heading-about-us.jpg?3");
 }
 
+.background-image-heading-products.refund {
+  background-image: url("../img/backgrounds/heading-refund.jpg");
+}
+
+.background-image-heading-products.sizes {
+  background-image: url("../img/backgrounds/heading-sizes.jpg?1");
+}
+
+.background-image-heading-products.order {
+  background-image: url("../img/backgrounds/heading-order.jpg");
+}
+
+.background-image-heading-products.offer {
+  background-image: url("../img/backgrounds/heading-offer.jpg?2");
+}
+
 .background-image-heading-contact {
   background-image: url("../img/backgrounds/heading-contact.jpg");
 }
@@ -24,7 +40,7 @@
 
 .background-image-heading-checkout,
 .background-image-heading-products.checkout {
-  background-image: url("../img/backgrounds/heading-checkout.jpg");
+  background-image: url("../img/backgrounds/heading-checkout.jpg?1");
 }
 
 .background-image-heading-products.resend,

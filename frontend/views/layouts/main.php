@@ -78,8 +78,8 @@ MyAppAsset::register($this);
                                                             <h4><a href="#"><?= Yii::$app->user->identity->username ?></a></h4>
                                                         </div>
                                                         <ul>
-                                                            <li><a href="#">Мои заказы</a></li>
-                                                            <li><a href="#">Мои данные</a></li>
+<!--                                                            <li><a href="#">Мои заказы</a></li>-->
+<!--                                                            <li><a href="#">Мои данные</a></li>-->
                                                             <li><a href="/user/security/logout" data-method='post'>Выйти</a></li>
                                                         </ul>
                                                     </div>
@@ -262,8 +262,8 @@ MyAppAsset::register($this);
                                     <div class="widget">
                                         <h3 class="widget-title">Как с нами связаться</h3>
                                         <div class="widget-content">
-                                            <p>Телефон: +7 (495) 989—20—11</p>
-                                            <p>Mail: hosoren@gmail.com</p>
+                                            <p>Телефон: <?=Yii::$app->params['phone'];?></p>
+                                            <p>Mail: <a href="mailto:<?=Yii::$app->params['email'];?>"><?=Yii::$app->params['email'];?></a></p>
                                         </div>
                                     </div><!-- /.widget -->
                                 </div>

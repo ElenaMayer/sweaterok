@@ -37,12 +37,12 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
         </div>
         <?= $form->field($order, 'notes')->textarea(['class' => 'form-control dark', 'rows' => "3"]); ?>
         <?php if (Yii::$app->user->isGuest): ?>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="">
-                    <span>Создать аккаунт?</span>
-                </label>
-            </div><!-- /.checkbox -->
+<!--            <div class="checkbox">-->
+<!--                <label>-->
+<!--                    <input type="checkbox" value="">-->
+<!--                    <span>Создать аккаунт?</span>-->
+<!--                </label>-->
+<!--            </div><!-- /.checkbox -->
         <?php endif;?>
     </div>
 

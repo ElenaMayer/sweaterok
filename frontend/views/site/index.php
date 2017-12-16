@@ -10,7 +10,7 @@ $this->title = Yii::$app->params['title'];
             <div class="main-slider owl-carousel owl-carousel-inset">
                 <div class="main-slider-item">
                     <div class="main-slider-image">
-                        <img src="./img/samples/sliders/1.jpg" alt="">
+                        <img src="./img/samples/sliders/1.jpg?1" alt="">
                     </div>
                     <div class="main-slider-text">
                         <div class="fp-table">
@@ -19,14 +19,14 @@ $this->title = Yii::$app->params['title'];
                                     <h4>Только в декабре</h4>
                                     <h3>Доставка курьером бесплатно</h3>
                                     <div class="button">
-                                        <a href="/payment" class="btn btn-lg btn-primary">Подробнее</a>
+                                        <a href="/site/payment" class="btn btn-lg btn-primary">Подробнее</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="main-slider-item">
+                <!--div class="main-slider-item">
                     <div class="main-slider-image">
                         <img src="./img/samples/sliders/2.jpg" alt="">
                     </div>
@@ -49,7 +49,7 @@ $this->title = Yii::$app->params['title'];
                     <div class="main-slider-image">
                         <img src="./img/samples/sliders/3.jpg" alt="">
                     </div>
-                </div>
+                </div-->
             </div>
         </div>
         <script>
