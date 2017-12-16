@@ -6,6 +6,8 @@ use yii\behaviors\SluggableBehavior;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
 use Yii;
+use yii\web\UploadedFile;
+use Imagine\Image\Box;
 
 /**
  * This is the model class for table "product".
@@ -38,6 +40,10 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
      * @inheritdoc
      */
 
+    /**
+     * @var UploadedFile[]
+     */
+    public $imageFiles;
     public $size;
 
     public static function tableName()
@@ -65,6 +71,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
             [['category_id', 'is_in_stock', 'is_active', 'is_novelty'], 'integer'],
             [['price'], 'number'],
             [['time, color, sizes'], 'safe'],
+            [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 10],
             [['title', 'slug', 'article', 'sex', 'structure'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
@@ -91,7 +98,30 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
             'sizes' => 'Размеры',
             'structure' => 'Состав',
             'time' => 'Время создания',
+            'imageFiles' => 'Фото',
         ];
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            foreach ($this->imageFiles as $key=>$file) {
+                $image = new Image();
+                $image->product_id = $this->id;
+                if ($image->save()) {
+                    $file->saveAs($image->getPath());
+                    \yii\imagine\Image::getImagine()
+                        ->open($image->getPath())
+                        ->thumbnail(new Box(Yii::$app->params['productMediumImageWidth'], Yii::$app->params['productMediumImageHeight']))
+                        ->save($image->getPath('medium', ['quality' => 80]))
+                        ->thumbnail(new Box(Yii::$app->params['productSmallImageWidth'], Yii::$app->params['productSmallImageHeight']))
+                        ->save($image->getPath('small', ['quality' => 80]));
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

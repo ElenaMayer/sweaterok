@@ -57,8 +57,8 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
                     <li>
                         <div class="cart-item">
                             <div class="product-image">
-                                <a href="<?= $product->images[0]->getUrl()?>" title="<?= Html::encode($product->title)?>">
-                                    <?= Html::img($product->images[0]->getUrl(), ['width' => '100%', 'alt'=>$product->title]);?>
+                                <a href="<?= $product->images[0]->getUrl('small')?>" title="<?= Html::encode($product->title)?>">
+                                    <?= Html::img($product->images[0]->getUrl('small'), ['width' => '100%', 'alt'=>$product->title]);?>
                                 </a>
                             </div>
                             <div class="product-body">

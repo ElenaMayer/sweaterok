@@ -103,4 +103,24 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionRefund()
+    {
+        return $this->render('refund');
+    }
+
+    public function actionOffer()
+    {
+        return $this->render('offer');
+    }
+
+    public function actionSizes()
+    {
+        return $this->render('sizes');
+    }
+
+    public function actionOrder()
+    {
+        return $this->render('order');
+    }
 }

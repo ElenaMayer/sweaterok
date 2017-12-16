@@ -8,15 +8,14 @@ use yii\helpers\Url;
     <div class="product-media">
         <div class="product-thumbnail">
             <a href="/catalog/<?= $model->category->slug?>/<?= $model->id?>" title="<?= $model->title?>">
-                <?php
-                $images = $model->images;?>
+                <?php $images = $model->images;?>
                 <?php if (isset($images[0])):?>
-                    <?= Html::img($images[0]->getUrl(), ['width' => '100%']);?>
+                    <?= Html::img($images[0]->getUrl('medium'), ['width' => '100%']);?>
                 <?php else: ?>
                     <img src="/img/samples/products/grid/1.jpg" alt="" class="current">
                 <?php endif;?>
                 <?php if (isset($images[1])):?>
-                    <?= Html::img($images[1]->getUrl(), ['width' => '100%']);?>
+                    <?= Html::img($images[1]->getUrl('medium'), ['width' => '100%']);?>
                 <?php else: ?>
                     <img src="/img/samples/products/index/clothing/2.jpg" alt="">
                 <?php endif;?>
@@ -53,7 +52,7 @@ use yii\helpers\Url;
     </div><!-- /.product-media -->
     <div class="product-body">
         <h2 class="product-name">
-            <a href="#" title="<?= Html::encode($model->title) ?>"><?= Html::encode($model->title) ?></a>
+            <a href="/catalog/<?= $model->category->slug?>/<?= $model->id?>" title="<?= Html::encode($model->title) ?>"><?= Html::encode($model->title) ?></a>
         </h2><!-- /.product-product -->
         <div class="product-category">
             <span><?= $model->category->title?></span>

@@ -117,8 +117,8 @@ MyAppAsset::register($this);
                                                         <li>
                                                         <div class="whishlist-item">
                                                             <div class="product-image">
-                                                                <a href="<?= $product->images[0]->getUrl()?>" title="<?= Html::encode($product->title)?>">
-                                                                    <?= Html::img($product->images[0]->getUrl(), ['width' => '100%', 'alt'=>$product->title]);?>
+                                                                <a href="<?= $product->images[0]->getUrl('small')?>" title="<?= Html::encode($product->title)?>">
+                                                                    <?= Html::img($product->images[0]->getUrl('small'), ['width' => '100%', 'alt'=>$product->title]);?>
                                                                 </a>
                                                             </div>
                                                             <div class="product-body">
@@ -262,8 +262,7 @@ MyAppAsset::register($this);
                                     <div class="widget">
                                         <h3 class="widget-title">Как с нами связаться</h3>
                                         <div class="widget-content">
-                                            <p>Телефон: 8 (495) 989—20—11</p>
-                                            <p>Время работы: 09:00-21:00</p>
+                                            <p>Телефон: +7 (495) 989—20—11</p>
                                             <p>Mail: hosoren@gmail.com</p>
                                         </div>
                                     </div><!-- /.widget -->
@@ -277,8 +276,8 @@ MyAppAsset::register($this);
                                     <li><a href="/cart/checkout" title="Корзина">Корзина</a></li>
                                     <li><a href="/site/shipping" title="Доставка">Доставка</a></li>
                                     <li><a href="/site/payment" title="Оплата">Оплата</a></li>
-                                    <li><a href="#" title="">Возврат</a></li>
-                                    <li><a href="#" title="">Ваши заказы</a></li>
+                                    <li><a href="/site/refund" title="Возврат">Возврат</a></li>
+<!--                                    <li><a href="#" title="">Ваши заказы</a></li>-->
                                 </ul>
                             </div><!-- /.widget -->
                         </div>
@@ -286,10 +285,10 @@ MyAppAsset::register($this);
                             <div class="widget">
                                 <h3 class="widget-title">Помощь</h3>
                                 <ul>
-                                    <li><a href="/contact" title="Контакты">Контакты</a></li>
-                                    <li><a href="#" title="">Как сделать заказ</a></li>
-                                    <li><a href="#" title="">Оферта</a></li>
-                                    <li><a href="#" title="">Как выбрать размер</a></li>
+                                    <li><a href="/site/contact" title="Контакты">Контакты</a></li>
+                                    <li><a href="/site/order" title="Как сделать заказ">Как сделать заказ</a></li>
+                                    <li><a href="/site/offer" title="Оферта">Оферта</a></li>
+                                    <li><a href="/site/sizes" title="Как выбрать размер">Как выбрать размер</a></li>
                                 </ul>
                             </div><!-- /.widget -->
                         </div>
@@ -330,9 +329,9 @@ MyAppAsset::register($this);
                 </div>
             </div><!-- /.footer-copyright -->
         </div><!-- /.footer-wrapper -->
-        <a href="#" class="back-top" title="">
+        <a href="#" class="back-top" title="Наверх">
                 <span class="back-top-image">
-                    <img src="/img/back-top.png" alt="">
+                    <img src="/img/back-top.png" alt="Наверх">
                 </span>
             <small>Наверх</small>
         </a><!-- /.back-top -->
