@@ -87,11 +87,20 @@ class CatalogController extends \yii\web\Controller
             ->andWhere(['is_active' => 1, 'is_in_stock' => 1])
             ->limit(Yii::$app->params['productPageRelatedCount'])
             ->all();
+        $imagesForZoom = [];
+        foreach ($product->images as $image){
+            $imagesForZoom[] = [
+                'image'=>$image->getUrl(),
+                'small'=>$image->getUrl('medium'),
+                'medium'=>$image->getUrl()
+            ];
+        }
 
         return $this->render('product', [
             'category' => $category,
             'product' => $product,
             'relatedProducts' => $relatedProducts,
+            'images' => $imagesForZoom,
         ]);
     }
 

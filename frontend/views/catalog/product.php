@@ -12,39 +12,12 @@ $this->params['breadcrumbs'][] = $product->title;
 
 <div class="row">
     <div class="col-md-6">
-        <?php $images = [
-            [
-                'image'=>$product->images[0]->getUrl(),
-                'small'=>$product->images[0]->getUrl('medium'),
-                'medium'=>$product->images[0]->getUrl()
-            ],
-            [
-                'image'=>$product->images[1]->getUrl(),
-                'small'=>$product->images[1]->getUrl('medium'),
-                'medium'=>$product->images[1]->getUrl()
-            ],
-        ];
-
-        echo ElevateZoom::widget([
+        <?php echo ElevateZoom::widget([
             'images'=>$images,
         ]); ?>
 
     </div>
     <div class="col-md-6">
-<!--        <nav class="pnav">-->
-<!--            <div class="pull-right">-->
-<!--                <a href="#" class="btn btn-sm btn-arrow btn-default">-->
-<!--                    <i class="fa fa-chevron-left"></i>-->
-<!--                </a>-->
-<!--                <a href="#" class="btn btn-sm btn-arrow btn-default">-->
-<!--                    <i class="fa fa-chevron-right"></i>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--            <a href="/catalog/--><!--//=$category->slug?><!--" class="back-to-pcate">-->
-<!--                <i class="fa fa-chevron-left"></i>-->
-<!--                <span>Обратно к разделу --><!--//=$category->title?><!--</span>-->
-<!--            </a>-->
-<!--        </nav><!-- /header -->
         <div class="product-details-wrapper">
             <h2 class="product-name">
                 <?= $product->title?>
