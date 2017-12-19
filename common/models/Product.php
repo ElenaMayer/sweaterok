@@ -112,6 +112,8 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
                     $file->saveAs($image->getPath());
                     \yii\imagine\Image::getImagine()
                         ->open($image->getPath())
+                        ->thumbnail(new Box(Yii::$app->params['productOriginalImageWidth'], Yii::$app->params['productOriginalImageHeight']))
+                        ->save($image->getPath('origin', ['quality' => 80]))
                         ->thumbnail(new Box(Yii::$app->params['productMediumImageWidth'], Yii::$app->params['productMediumImageHeight']))
                         ->save($image->getPath('medium', ['quality' => 80]))
                         ->thumbnail(new Box(Yii::$app->params['productSmallImageWidth'], Yii::$app->params['productSmallImageHeight']))

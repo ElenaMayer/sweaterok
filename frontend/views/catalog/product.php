@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use amilna\elevatezoom\ElevateZoom;
 
 $this->title = Yii::$app->params['title'].' - '.$product->title;
 $this->params['breadcrumbs'][] = [
@@ -11,32 +12,23 @@ $this->params['breadcrumbs'][] = $product->title;
 
 <div class="row">
     <div class="col-md-6">
-        <div class="product-slider-wrapper thumbs-bottom">
-            <div class="swiper-container product-slider-main">
-                <div class="swiper-wrapper">
-                    <?php foreach ($product->images as $image):?>
-                        <div class="swiper-slide">
-                            <div class="easyzoom easyzoom--overlay">
-                                <a href="<?= $image->getUrl()?>" title="<?= $product->title?>">
-                                    <?= Html::img($image->getUrl(), ['width' => '100%', 'alt'=>$product->title]);?>
-                                </a>
-                            </div>
-                        </div>
-                    <?php endforeach;?>
-                </div>
-                <div class="swiper-button-prev"><i class="fa fa-chevron-left"></i></div>
-                <div class="swiper-button-next"><i class="fa fa-chevron-right"></i></div>
-            </div><!-- /.swiper-container -->
-            <div class="swiper-container product-slider-thumbs">
-                <div class="swiper-wrapper">
-                    <?php foreach ($product->images as $image):?>
-                        <div class="swiper-slide">
-                            <?= Html::img($image->getUrl(), ['width' => '100%', 'alt'=>$product->title]);?>
-                        </div>
-                    <?php endforeach;?>
-                </div>
-            </div><!-- /.swiper-container -->
-        </div><!-- /.product-slider-wrapper -->
+        <?php $images = [
+            [
+                'image'=>$product->images[0]->getUrl(),
+                'small'=>$product->images[0]->getUrl('medium'),
+                'medium'=>$product->images[0]->getUrl()
+            ],
+            [
+                'image'=>$product->images[1]->getUrl(),
+                'small'=>$product->images[1]->getUrl('medium'),
+                'medium'=>$product->images[1]->getUrl()
+            ],
+        ];
+
+        echo ElevateZoom::widget([
+            'images'=>$images,
+        ]); ?>
+
     </div>
     <div class="col-md-6">
 <!--        <nav class="pnav">-->
@@ -74,23 +66,33 @@ $this->params['breadcrumbs'][] = $product->title;
             <div class="product-description">
                 <p><?= $product->description?></p>
             </div><!-- /.product-description -->
+            <div class="product-details-top">
+                <ul>
+                    <li>
+                        <span><b>Цвет</b></span>
+                        <span class="value"><?= $product->color?></span>
+                    </li>
+                    <li>
+                        <span><b>Состав</b></span>
+                        <span class="value"><?= $product->structure?></span>
+                    </li>
+                </ul>
+            </div><!-- /.tab-pane -->
             <div class="product-actions-wrapper">
                 <?php if($product->is_in_stock):?>
-                    <form action="product-quick-view.html" method="POST">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="p_size">Размер</label>
-                                    <select name="p_size" id="p_size" class="form-control">
-                                        <?php $sizes = explode(',', $product->sizes);?>
-                                        <?php foreach ($sizes as $size):?>
-                                            <option value="<?= $size?>"><?= $size?></option>
-                                        <?php endforeach;?>
-                                    </select>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="p_size">Размер</label>
+                                <select name="p_size" id="p_size" class="form-control">
+                                    <?php $sizes = explode(',', $product->sizes);?>
+                                    <?php foreach ($sizes as $size):?>
+                                        <option value="<?= $size?>"><?= $size?></option>
+                                    <?php endforeach;?>
+                                </select>
                             </div>
                         </div>
-                    </form><!-- /.form -->
+                    </div>
                 <?php endif;?>
                 <div class="product-list-actions" data-id="<?= $product->id ?>">
                         <span class="product-price">
@@ -118,35 +120,6 @@ $this->params['breadcrumbs'][] = $product->title;
         <li><a href="#" data-toggle="tooltip" title="Facebook"><i class="icon icon-facebook"></i></a></li>
     </ul>
 </div><!-- /.product-socials -->
-<div class="product-details-left">
-    <div role="tabpanel" class="product-details">
-        <nav>
-            <ul class="nav" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#product-infomation"  data-toggle="tab">Хорактеристики</a>
-                </li>
-<!--                <li role="presentation">-->
-<!--                    <a href="#product-review"  data-toggle="tab">Отзывы <span>(2)</span></a>-->
-<!--                </li>-->
-            </ul><!-- /.nav -->
-        </nav><!-- /nav -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="product-infomation">
-                <ul>
-                    <li>
-                        <span>Цвет</span>
-                        <span class="value"><?= $product->color?></span>
-                    </li>
-                    <li>
-                        <span>Состав</span>
-                        <span class="value"><?= $product->structure?></span>
-                    </li>
-                </ul>
-            </div><!-- /.tab-pane -->
-            <!-- $this->render('_product_review', []); -->
-        </div><!-- /.tab-pane -->
-    </div><!-- /.tab-content -->
-</div><!-- /.product-details-left -->
 <div class="related-products">
     <div class="related-products-header margin-bottom-50">
         <h3 class="upper">Популярное</h3>

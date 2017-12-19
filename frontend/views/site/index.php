@@ -66,7 +66,7 @@ $this->title = Yii::$app->params['title'];
                                 <i class="icon icon-shirt"></i>
                             </div>
                             <div class="policy-text">
-                                <h4>Свое производство</h4>
+                                <h4>Собственное производство</h4>
                                 <p>С 2000 года</p>
                             </div>
                         </div><!-- /.policy -->

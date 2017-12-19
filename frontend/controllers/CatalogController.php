@@ -27,7 +27,7 @@ class CatalogController extends \yii\web\Controller
 
         $categories = Category::find()->where(['is_active' => 1])->indexBy('id')->orderBy('id')->all();
 
-        $productsQuery = Product::find()->where(1);
+        $productsQuery = Product::find()->where(['is_active' => 1]);
         if($get = Yii::$app->request->get()){
             $this->prepareFilter($productsQuery);
         }

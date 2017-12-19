@@ -18,6 +18,34 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-md-6">
                     <div class="contact-content">
                         <h2>Наши магазины</h2>
+
+                        <div class="contact-block">
+                            <dl class="dl-horizontal">
+                                <dt>Адрес</dt>
+                                <dd>Новосибирск, пр.Дзержинского, 2/2, ТЦ “Холидей Family“, 2 этаж</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Часы работы</dt>
+                                <dd>Ежедневно, с 10 до 21 часов</dd>
+                            </dl>
+                            <div class="contact-header">
+                                <div class="contact-image">
+                                    <img src="/img/samples/banners/contact/banner-contact-1.jpg" alt="">
+                                </div>
+                            </div><!-- /.contact-header -->
+                        </div><!-- /.contact-block -->
+
+                        <div class="contact-block">
+                            <dl class="dl-horizontal">
+                                <dt>Адрес</dt>
+                                <dd>Новосибирск, ул. Курчатова,1, ТЦ “Голден Парк“, 3 этаж</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Часы работы</dt>
+                                <dd>Ежедневно, с 10 до 22 часов</dd>
+                            </dl>
+                        </div><!-- /.contact-block -->
+
                         <div class="contact-block">
                             <dl class="dl-horizontal">
                                 <dt>Адрес</dt>
@@ -27,11 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <dt>Часы работы</dt>
                                 <dd>Ежедневно, с 10 до 22 часов</dd>
                             </dl>
-                            <div class="contact-header">
-                                <div class="contact-image">
-                                    <img src="/img/samples/banners/contact/banner-contact-1.jpg" alt="">
-                                </div>
-                            </div><!-- /.contact-header -->
                         </div><!-- /.contact-block -->
 
                         <div class="contact-block">
@@ -41,36 +64,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             </dl>
                             <dl class="dl-horizontal">
                                 <dt>Часы работы</dt>
-                                <dd>пн-пт — с 10 до 19 часов, сб-вс — с 10 до 17 часов</dd>
-                            </dl>
-                            <div class="contact-header">
-                                <div class="contact-image">
-                                    <img src="/img/samples/banners/contact/banner-contact-1.jpg" alt="">
-                                </div>
-                            </div><!-- /.contact-header -->
-                        </div><!-- /.contact-block -->
-
-                        <div class="contact-block">
-                            <dl class="dl-horizontal">
-                                <dt>Адрес</dt>
-                                <dd>Новосибирск, пр.Дзержинского, 2/2, ТЦ “Роща“, 2 этаж</dd>
-                            </dl>
-                            <dl class="dl-horizontal">
-                                <dt>Часы работы</dt>
-                                <dd>пн-пт — с 10 до 19 часов, сб-вс — с 10 до 17 часов</dd>
+                                <dd>Ежедневно, с 10 до 19 часов</dd>
                             </dl>
                         </div><!-- /.contact-block -->
 
-                        <div class="contact-block">
-                            <dl class="dl-horizontal">
-                                <dt>Адрес</dt>
-                                <dd>Новосибирск, пр.Дзержинского, 2/2, ТЦ “Роща“, 2 этаж</dd>
-                            </dl>
-                            <dl class="dl-horizontal">
-                                <dt>Часы работы</dt>
-                                <dd>пн-пт — с 10 до 19 часов, сб-вс — с 10 до 17 часов</dd>
-                            </dl>
-                        </div><!-- /.contact-block -->
                     </div><!-- /.contact-content -->
                 </div><!-- /.col-md-6 -->
 

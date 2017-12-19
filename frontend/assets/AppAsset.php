@@ -26,7 +26,7 @@ class AppAsset extends AssetBundle
         //build:css css/bootstrap.css
         "css/bootstrap.css",
         //build:css css/plugins.css
-        "css/awe-icon.css?1",
+        "css/awe-icon.css?2",
         "css/font-awesome.css",
         "css/magnific-popup.css",
         "css/owl.carousel.css",
@@ -36,7 +36,7 @@ class AppAsset extends AssetBundle
         "css/nanoscroller.css",
         //build:css css/styles.css
         "css/awe-background.css?7",
-        "css/main.css?15",
+        "css/main.css?18",
         "css/docs.css",
     ];
     public $js = [

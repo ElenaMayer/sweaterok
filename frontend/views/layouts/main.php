@@ -169,7 +169,7 @@ MyAppAsset::register($this);
                             </ul>
                         </div>
                         <div class="awe-logo">
-                            <a href="<?= Yii::$app->homeUrl ?>" title="Главная"><img src="/img/logo.png?2" alt=""></a>
+                            <a href="<?= Yii::$app->homeUrl ?>" title="Главная"><img src="/img/logo.png?3" alt="Главная"></a>
                         </div><!-- /.awe-logo -->
                         <ul class="awemenu awemenu-right">
                             <?php
@@ -188,18 +188,8 @@ MyAppAsset::register($this);
                                 </a>
                             </li>
                             <li class="awemenu-item">
-                                <a href="/site/shipping" title="Доставка">
-                                    <span>Доставка</span>
-                                </a>
-                            </li>
-                            <li class="awemenu-item">
-                                <a href="/site/payment" title="Оплата">
-                                    <span>Оплата</span>
-                                </a>
-                            </li>
-                            <li class="awemenu-item">
-                                <a href="/site/about" title="О нас">
-                                    <span>О нас</span>
+                                <a href="/site/shipping" title="Доставка и оплата">
+                                    <span>Доставка и оплата</span>
                                 </a>
                             </li>
                         </ul><!-- /.awemenu -->
@@ -274,8 +264,7 @@ MyAppAsset::register($this);
                                 <h3 class="widget-title">Доставка</h3>
                                 <ul>
                                     <li><a href="/cart/checkout" title="Корзина">Корзина</a></li>
-                                    <li><a href="/site/shipping" title="Доставка">Доставка</a></li>
-                                    <li><a href="/site/payment" title="Оплата">Оплата</a></li>
+                                    <li><a href="/site/shipping" title="Доставка">Доставка и оплата</a></li>
                                     <li><a href="/site/refund" title="Возврат">Возврат</a></li>
 <!--                                    <li><a href="#" title="">Ваши заказы</a></li>-->
                                 </ul>
@@ -285,6 +274,7 @@ MyAppAsset::register($this);
                             <div class="widget">
                                 <h3 class="widget-title">Помощь</h3>
                                 <ul>
+                                    <li><a href="/site/about" title="О нас">О нас</a></li>
                                     <li><a href="/site/contact" title="Контакты">Контакты</a></li>
                                     <li><a href="/site/order" title="Как сделать заказ">Как сделать заказ</a></li>
                                     <li><a href="/site/offer" title="Оферта">Оферта</a></li>
