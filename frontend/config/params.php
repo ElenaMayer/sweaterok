@@ -1,7 +1,6 @@
 <?php
 // Yii::$app->params['domain'];
 return [
-    'adminEmail' => 'admin@example.com',
     'catalogPageSize' => 12,
     'title' => 'SIBWEAR',
     'developerSite' => '',

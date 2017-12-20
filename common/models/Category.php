@@ -74,7 +74,7 @@ class Category extends \yii\db\ActiveRecord
             'slug' => 'Slug',
             'is_active' => 'Показывать',
             'description' => 'Описание',
-            'imageFile' => 'Картинка для главной (270х490)',
+            'imageFile' => 'Картинка для главной (540х980)',
             'time' => 'Time',
         ];
     }

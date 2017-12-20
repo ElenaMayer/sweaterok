@@ -18,7 +18,7 @@ MyAppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <meta name="description" content="">
+    <meta name="description" content="Вязаные платья, свитера, кардиганы собственного производства.">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?= Html::encode($this->title) ?></title>

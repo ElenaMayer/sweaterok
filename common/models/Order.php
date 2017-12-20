@@ -96,9 +96,9 @@ class Order extends \yii\db\ActiveRecord
     public static function getStatuses()
     {
         return [
-            self::STATUS_DONE => 'Done',
-            self::STATUS_IN_PROGRESS => 'In progress',
-            self::STATUS_NEW => 'New',
+            self::STATUS_DONE => 'Выполнено',
+            self::STATUS_IN_PROGRESS => 'В обработке',
+            self::STATUS_NEW => 'Новый',
         ];
     }
 
@@ -107,7 +107,7 @@ class Order extends \yii\db\ActiveRecord
         return Yii::$app->mailer->compose('order', ['order' => $this])
             ->setTo(Yii::$app->params['adminEmail'])
             ->setFrom(Yii::$app->params['adminEmail'])
-            ->setSubject('New order #' . $this->id)
+            ->setSubject('Новый заказ #' . $this->id)
             ->send();
     }
 }
