@@ -60,9 +60,10 @@ class CartController extends \yii\web\Controller
                 $order->save(false);
 
                 foreach ($products as $product) {
+                    $p = $product->getProduct();
                     $orderItem = new OrderItem();
                     $orderItem->order_id = $order->id;
-                    $orderItem->title = $product->title;
+                    $orderItem->title = $p->article . ' ' . $p->title;
                     $orderItem->price = $product->getPrice();
                     $orderItem->product_id = $product->id;
                     $orderItem->quantity = $product->getQuantity();
