@@ -1,8 +1,7 @@
 <?php
 // Yii::$app->params['productSmallImageHeight'];
 return [
-    'adminEmail' => 'linner86@mail.ru',
-    'supportEmail' => 'support@example.com',
+    'supportEmail' => 'support@sibwear.ru',
     'user.passwordResetTokenExpire' => 3600,
     'productOriginalImageWidth'=> 1200,
     'productOriginalImageHeight'=> 1600,
