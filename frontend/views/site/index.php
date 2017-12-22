@@ -10,16 +10,16 @@ $this->title = Yii::$app->params['title'];
             <div class="main-slider owl-carousel owl-carousel-inset">
                 <div class="main-slider-item">
                     <div class="main-slider-image">
-                        <img src="./img/samples/sliders/1.jpg?1" alt="">
+                        <img src="./img/samples/sliders/1.jpg?2" alt="Доставка курьером бесплатно!">
                     </div>
-                    <div class="main-slider-text">
+                    <div class="main-slider-text big">
                         <div class="fp-table">
                             <div class="fp-table-cell center">
                                 <div class="container">
                                     <h4>Только в декабре</h4>
                                     <h3>Доставка курьером бесплатно</h3>
                                     <div class="button">
-                                        <a href="/site/payment" class="btn btn-lg btn-primary">Подробнее</a>
+                                        <a href="/site/shipping" class="btn btn-lg btn-primary">Подробнее</a>
                                     </div>
                                 </div>
                             </div>

@@ -64,6 +64,15 @@
 .background-image-heading-products.payment {
   background-image: url("../img/backgrounds/heading-payment.jpg");
 }
+
+.background-image-heading-products.product {
+  background-image: url("../img/backgrounds/heading-product.jpg?1");
+}
+
+.background-image-heading-products.list {
+  background-image: url("../img/backgrounds/heading-list.jpg");
+}
+
 .background-image-heading-product {
   background-image: url("../img/backgrounds/heading-product.jpg");
 }

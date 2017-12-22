@@ -43,8 +43,9 @@ use yii\helpers\Html;
                         </div>
                     </form><!-- /.form -->
                         <div class="product-list-actions">
-                            <?= Html::a('В корзину', ['cart/add', 'id' => $product->id, 'size' => array_shift($sizes), 'returnUrl' => $returnUrl], ['class' => 'btn btn-lg btn-primary'])?>
-                            <?= Html::a('Купить', ['cart/add', 'id' => $product->id, 'size' => array_shift($sizes), 'returnUrl' => '/cart/checkout'], ['class' => 'btn  btn-primary btn-lg btn-outline'])?>
+                            <?php $currentSize = array_shift($sizes);?>
+                            <?= Html::a('В корзину', ['cart/add', 'id' => $product->id, 'size' => $currentSize, 'returnUrl' => $returnUrl], ['class' => 'btn btn-lg btn-primary'])?>
+                            <?= Html::a('Купить', ['cart/add', 'id' => $product->id, 'size' => $currentSize, 'returnUrl' => '/cart/checkout'], ['class' => 'btn  btn-primary btn-lg btn-outline'])?>
                         </div><!-- /.product-actions -->
                 </div>
             <?php endif;?>

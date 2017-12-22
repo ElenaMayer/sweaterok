@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $product->title;
         ]); ?>
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 product-desc-col">
         <div class="product-details-wrapper">
             <h2 class="product-name">
                 <?= $product->title?>
@@ -72,8 +72,9 @@ $this->params['breadcrumbs'][] = $product->title;
                             <span class="amount"><?= (int)$product->price?>₽</span>
                         </span><!-- /.product-price -->
                     <?php if($product->is_in_stock):?>
-                        <?= Html::a('В корзину', ['cart/add', 'id' => $product->id, 'size' => array_shift($sizes)], ['class' => 'btn btn-lg btn-primary'])?>
-                        <?= Html::a('Купить', ['cart/add', 'id' => $product->id, 'size' => array_shift($sizes), 'returnUrl' => '/cart/checkout'], ['class' => 'btn  btn-primary btn-lg btn-outline'])?>
+                        <?php $currentSize = array_shift($sizes);?>
+                        <?= Html::a('В корзину', ['cart/add', 'id' => $product->id, 'size' => $currentSize], ['class' => 'btn btn-lg btn-primary'])?>
+                        <?= Html::a('Купить', ['cart/add', 'id' => $product->id, 'size' => $currentSize, 'returnUrl' => '/cart/checkout'], ['class' => 'btn  btn-primary btn-lg btn-outline'])?>
                     <?php endif;?>
                 </div><!-- /.product-list-actions -->
             </div><!-- /.product-actions-wrapper -->
