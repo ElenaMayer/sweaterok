@@ -4322,8 +4322,10 @@ h2.entry-title {
   font-weight: 700;
 }
 
-.col-md-6.product-desc-col {
-  clear: both;
+@media (max-width: 992px) {
+  .col-md-6.product-desc-col {
+    clear: both;
+  }
 }
 
 .payment-detail-wrapper .product-price,

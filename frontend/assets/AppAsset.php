@@ -36,7 +36,7 @@ class AppAsset extends AssetBundle
         "css/nanoscroller.css",
         //build:css css/styles.css
         "css/awe-background.css?8",
-        "css/main.css?21",
+        "css/main.css?22",
         "css/docs.css",
     ];
     public $js = [
