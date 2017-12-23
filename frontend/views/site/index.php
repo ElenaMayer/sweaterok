@@ -16,7 +16,7 @@ $this->title = Yii::$app->params['title'];
                         <div class="fp-table">
                             <div class="fp-table-cell center">
                                 <div class="container">
-                                    <h4>Только в декабре</h4>
+                                    <h4>Только до 31 января</h4>
                                     <h3>Доставка курьером бесплатно</h3>
                                     <div class="button">
                                         <a href="/site/shipping" class="btn btn-lg btn-primary">Подробнее</a>
@@ -122,7 +122,7 @@ $this->title = Yii::$app->params['title'];
                                 </div><!-- /.awe-media-header -->
                             </div><!-- /.awe-media -->
                         </div>
-                        <div class="col-md-9 col-sm-8">
+                        <div class="col-md-9 col-sm-8 <?php if($category->id%2 == 0):?>col-md-pull-3 col-sm-pull-4<?php endif;?>">
                             <div class="products owl-carousel" data-items="3">
                                 <?php
                                 $models = Product::find()
