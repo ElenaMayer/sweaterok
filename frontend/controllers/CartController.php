@@ -7,6 +7,7 @@ use common\models\OrderItem;
 use common\models\Product;
 use yz\shoppingcart\ShoppingCart;
 use Yii;
+use frontend\models\BoxberryApi;
 
 class CartController extends \yii\web\Controller
 {
@@ -82,10 +83,14 @@ class CartController extends \yii\web\Controller
                 return $this->redirect('/catalog/list');
             }
 
+            $bb = new BoxberryApi();
+            $cities = $bb->getListCities();
+
             return $this->render('checkout', [
                 'order' => $order,
                 'products' => $products,
                 'total' => $total,
+                'cities' => $cities,
             ]);
         } else {
             return $this->redirect('/catalog/list');

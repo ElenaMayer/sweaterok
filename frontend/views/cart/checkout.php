@@ -1,6 +1,10 @@
 <?php
 use \yii\helpers\Html;
 use \yii\bootstrap\ActiveForm;
+use kartik\depdrop\DepDrop;
+use yii\helpers\Url;
+use \common\models\Order;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $products common\models\Product[] */
@@ -86,17 +90,53 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
                     <?php endforeach ?>
                 </ul> <!-- /.cart-list -->
             </div><!-- /.payment-detail-wrapper -->
+            <div class="cart-checkboxes">
+
+                <h3>Способ доставки</h3>
+
+                <?php echo $form->field($order, 'shipping_method')->dropDownList(Order::getShippingMethod(), ['id'=>'shipping_method-id']); ?>
+
+                <div class="shipping_method_boxberry_courier" style="display: none">
+                    <?= $form->field($order, 'zip')->textInput(['class' => 'form-control']); ?>
+                </div>
+
+                <div class="shipping_method_boxberry_point">
+                    <?php echo $form->field($order, 'city')->widget(Select2::classname(), [
+                        'data' => $cities,
+                        'options' => ['placeholder' => 'Выбрать город ...'],
+                    ]);
+
+                    // Child level 1
+                    echo $form->field($order, 'shipping_point')->widget(DepDrop::classname(), [
+                        'data'=> [],
+                        'options' => ['placeholder' => 'Выбрать ...'],
+                        'type' => DepDrop::TYPE_SELECT2,
+                        'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+                        'pluginOptions'=>[
+                            'depends'=>['order-city'],
+                            'url' => Url::to(['/ajax/points']),
+                            'loadingText' => 'Загрузка ...',
+                        ]
+                    ]);
+                    ?>
+                </div>
+
+                <script>
+                    $(function() { checkoutShipping(); });
+                </script>
+
+            </div><!-- /.cart-checkboxes -->
 
             <div class="cart-total">
                 <table>
                     <tbody>
+                    <tr class="shipping">
+                        <th>Доставка:</th>
+                        <td class="shipping-cost">0₽</td>
+                    </tr>
                     <tr class="cart-subtotal">
                         <th>Подитог:</th>
                         <td><span class="amount"><?=$total?>₽</span></td>
-                    </tr>
-                    <tr class="shipping">
-                        <th>Доставка:</th>
-                        <td>Бесплатно</td>
                     </tr>
                     <tr class="order-total">
                         <th>Итого:</th>
@@ -105,9 +145,7 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
                     </tbody>
                 </table>
             </div><!-- /.cart-total -->
-            <div class="cart-checkboxes">
-                <h3>Оплата при получении</h3>
-            </div><!-- /.cart-checkboxes -->
+
             <div class="col-xs-12">
                 <?= Html::submitButton('Отправить заказ', ['class' => 'btn btn-lg btn-primary']) ?>
             </div>

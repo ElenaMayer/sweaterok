@@ -17,6 +17,11 @@ use yii\behaviors\TimestampBehavior;
  * @property string $notes
  * @property string $status
  * @property string $fio
+ * @property integer $shipping_cost
+ * @property string $city
+ * @property string $shipping_method
+ * @property string $shipping_point
+ * @property integer $zip
  *
  * @property OrderItem[] $orderItems
  */
@@ -49,9 +54,10 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             [['phone', 'fio'], 'required'],
-            [['notes'], 'string'],
-            [['phone', 'email', 'fio'], 'string', 'max' => 255],
+            [['created_at', 'updated_at', 'shipping_cost', 'zip'], 'integer'],
+            [['address', 'notes'], 'string'],
             [['email'], 'email'],
+            [['phone', 'email', 'status', 'fio', 'city', 'shipping_method', 'shipping_point'], 'string', 'max' => 255],
         ];
     }
 
@@ -70,6 +76,11 @@ class Order extends \yii\db\ActiveRecord
             'notes' => 'Комментарий',
             'status' => 'Статус',
             'fio' => 'ФИО',
+            'shipping_cost' => 'Стоимость доставки',
+            'city' => 'Город',
+            'shipping_method' => 'Способ доставки',
+            'shipping_point' => 'Пункт выдачи',
+            'zip' => 'Индекс',
         ];
     }
 
@@ -109,5 +120,12 @@ class Order extends \yii\db\ActiveRecord
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->params['title']])
             ->setSubject('Новый заказ #' . $this->id)
             ->send();
+    }
+
+    public static function getShippingMethod(){
+        return [
+            'boxberry_point' => 'Boxberry - пункт выдачи',
+            'boxberry_courier' => 'Boxberry - курьер',
+        ];
     }
 }

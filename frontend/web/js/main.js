@@ -266,3 +266,24 @@ function showSizesOnCartButtonClick() {
         $( this).parents('.product-hover').children('.product-cart-sizes').show();
     });
 }
+
+function checkoutShipping() {
+    $("#shipping_method-id").on("change", function () {
+        if ($(this).val() === 'boxberry_point') {
+            $('.shipping_method_boxberry_courier').hide();
+            $('.shipping_method_boxberry_point').show();
+        } else {
+            $('.shipping_method_boxberry_courier').show();
+            $('.shipping_method_boxberry_point').hide();
+        }
+    });
+    // $( "#order-shipping_point" ).on( "change", function() {
+    //     console.log('shippingCost');
+    // });
+    //
+    // $( '.cart-checkboxes' ).on( 'keyup', '#order-zip', function() {
+    //     if ($(this).val().length === 6) {
+    //         console.log('shippingCost');
+    //     }
+    // });
+}

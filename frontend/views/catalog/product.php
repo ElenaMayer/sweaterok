@@ -12,10 +12,33 @@ $this->params['breadcrumbs'][] = $product->title;
 
 <div class="row">
     <div class="col-md-6">
-        <?php echo ElevateZoom::widget([
-            'images'=>$images,
-        ]); ?>
+        <div class="product-slider-wrapper thumbs-bottom">
+            <div class="swiper-container product-slider-main">
+                <div class="swiper-wrapper">
+                    <?php foreach ($product->images as $image):?>
+                        <div class="swiper-slide">
+                            <div class="easyzoom easyzoom--overlay">
+                                <a href="<?= $image->getUrl()?>" title="<?= $product->title?>">
+                                    <?= Html::img($image->getUrl(), ['width' => '100%', 'alt'=>$product->title]);?>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach;?>
+                </div>
+                <div class="swiper-button-prev"><i class="fa fa-chevron-left"></i></div>
+                <div class="swiper-button-next"><i class="fa fa-chevron-right"></i></div>
+            </div><!-- /.swiper-container -->
+            <div class="swiper-container product-slider-thumbs">
+                <div class="swiper-wrapper">
+                    <?php foreach ($product->images as $image):?>
+                        <div class="swiper-slide">
+                            <?= Html::img($image->getUrl(), ['width' => '100%', 'alt'=>$product->title]);?>
+                        </div>
+                    <?php endforeach;?>
+                </div>
+            </div><!-- /.swiper-container -->
 
+        </div><!-- /.product-slider-wrapper -->
     </div>
     <div class="col-md-6 product-desc-col">
         <div class="product-details-wrapper">
@@ -106,5 +129,7 @@ $this->params['breadcrumbs'][] = $product->title;
 </div><!-- /.related-products -->
 
 <script>
+    $(function() { aweProductRender(true); });
+
     $(function() { editAddCartButtonOnSizeChange(); });
 </script>
