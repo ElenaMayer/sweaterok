@@ -14,6 +14,8 @@ use kartik\select2\Select2;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
+    <?= $form->field($model, 'sort')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>

@@ -69,7 +69,7 @@ class Order extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'created_at' => 'Создан',
-            'updated_at' => 'Updated At',
+            'updated_at' => 'Обновлен',
             'phone' => 'Телефон',
             'address' => 'Адрес',
             'email' => 'Email',

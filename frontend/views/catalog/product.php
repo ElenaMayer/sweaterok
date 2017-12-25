@@ -88,6 +88,7 @@ $this->params['breadcrumbs'][] = $product->title;
                                 </select>
                             </div>
                         </div>
+                        <?= Html::a('Как выбрать размер?', ['site/sizes'], ['class' => 'product-sizes-link'])?>
                     </div>
                 <?php endif;?>
                 <div class="product-list-actions" data-id="<?= $product->id ?>">

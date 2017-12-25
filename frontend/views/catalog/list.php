@@ -105,7 +105,7 @@ if($category) {
                             <a href="<?= StaticFunction::addGetParamToCurrentUrl('color', 'all') ?>" title="На задано">
                                 <span class="color white all <?php if(!Yii::$app->request->get('color') || Yii::$app->request->get('color') == 'all'):?>active<?php endif;?>"></span>
                             </a>
-                            <a href="<?= StaticFunction::addGetParamToCurrentUrl('color', 'Красный') ?>" title="Азалия">
+                            <a href="<?= StaticFunction::addGetParamToCurrentUrl('color', 'Азалия') ?>" title="Азалия">
                                 <span class="color red <?php if(Yii::$app->request->get('color') && Yii::$app->request->get('color') == 'Азалия'):?>active<?php endif;?>"></span>
                             </a>
                             <a href="<?= StaticFunction::addGetParamToCurrentUrl('color', 'Жемчужный') ?>" title="Жемчужный">

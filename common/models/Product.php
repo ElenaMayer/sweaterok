@@ -27,6 +27,7 @@ use Imagine\Image\Box;
  * @property string $sizes
  * @property string $structure
  * @property string $time
+ * @property integer $sort
  *
  * @property Image[] $images
  * @property OrderItem[] $orderItems
@@ -68,7 +69,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
     {
         return [
             [['description'], 'string'],
-            [['category_id', 'is_in_stock', 'is_active', 'is_novelty'], 'integer'],
+            [['category_id', 'is_in_stock', 'is_active', 'is_novelty', 'sort'], 'integer'],
             [['price'], 'number'],
             [['time, color, sizes'], 'safe'],
             [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 10],
@@ -99,6 +100,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
             'structure' => 'Состав',
             'time' => 'Время создания',
             'imageFiles' => 'Фото',
+            'sort' => 'Позиция',
         ];
     }
 

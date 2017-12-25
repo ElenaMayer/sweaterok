@@ -31,10 +31,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'created_at',
             'updated_at',
+            'fio',
+            'address',
             'phone',
             'email:email',
             'notes:ntext',
             'status',
+            'shipping_cost',
+            'city',
+            'shipping_method',
+            'shipping_point',
+            'zip',
         ],
     ]) ?>
 

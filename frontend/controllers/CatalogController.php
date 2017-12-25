@@ -28,9 +28,10 @@ class CatalogController extends \yii\web\Controller
         $categories = Category::find()->where(['is_active' => 1])->indexBy('id')->orderBy('id')->all();
 
         $productsQuery = Product::find()->where(['is_active' => 1]);
-        if($get = Yii::$app->request->get()){
-            $this->prepareFilter($productsQuery);
-        }
+
+        $get = Yii::$app->request->get();
+        $this->prepareFilter($productsQuery);
+
         if ($slug !== null) {
             $category = Category::find()->where(['slug' => $slug])->one();
         }
@@ -56,25 +57,30 @@ class CatalogController extends \yii\web\Controller
     }
 
     private function prepareFilter(&$query){
-        $get = Yii::$app->request->get();
-        if(isset($get['color']) && $get['color'] != 'all'){
-            $query->andFilterWhere(['like', 'color', $get['color']]);
-        }
-        if(isset($get['size']) && $get['size'] != 'all'){
-            $query->andFilterWhere(['like', 'sizes', $get['size']]);
-        }
-        if(isset($get['price']) && $get['price'] != 'all'){
-            $priceArr = explode(',', $get['price']);
-            $query->andWhere(['between', 'price', $priceArr[0], $priceArr[1]]);
-        }
-        if(isset($get['order'])){
-            if($get['order'] == 'popular') {
-                $query->orderBy('time DESC');
-            } elseif ($get['order'] == 'novelty') {
-                $query->orderBy('is_novelty');
-            } elseif ($get['order'] == 'price'){
-                $query->orderBy('price DESC');
+        if($get = Yii::$app->request->get()){
+            if(isset($get['color']) && $get['color'] != 'all'){
+                $query->andFilterWhere(['like', 'color', $get['color']]);
             }
+            if(isset($get['size']) && $get['size'] != 'all'){
+                $query->andFilterWhere(['like', 'sizes', $get['size']]);
+            }
+            if(isset($get['price']) && $get['price'] != 'all'){
+                $priceArr = explode(',', $get['price']);
+                $query->andWhere(['between', 'price', $priceArr[0], $priceArr[1]]);
+            }
+            if(isset($get['order'])){
+                if($get['order'] == 'popular') {
+                    $query->orderBy('sort DESC, id DESC');
+                } elseif ($get['order'] == 'novelty') {
+                    $query->orderBy('is_novelty');
+                } elseif ($get['order'] == 'price'){
+                    $query->orderBy('price DESC');
+                }
+            } else {
+                $query->orderBy('sort DESC');
+            }
+        } else {
+            $query->orderBy('sort DESC');
         }
     }
 
