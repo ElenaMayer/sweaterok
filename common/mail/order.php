@@ -12,13 +12,14 @@ use yii\helpers\Html;
     <li>Адрес: <?= Html::encode($order->address) ?></li>
     <li>Телефон: <?= Html::encode($order->phone) ?></li>
     <li>Email: <?= Html::encode($order->email) ?></li>
-    <li>Доставка: <?= Html::encode(\common\models\Order::getShippingMethod()[$order->shipping_cost]) ?></li>
-    <?php if($order->shipping_cost == 'boxberry_point'):?>
+    <li>Доставка: <?= Html::encode(\common\models\Order::getShippingMethod()[$order->shipping_method]) ?></li>
+    <?php if($order->shipping_method == 'boxberry_point'):?>
         <li>Город: <?= Html::encode($order->city) ?></li>
         <li>Пункт выдачи: <?= Html::encode($order->shipping_point) ?></li>
     <?php else:?>
         <li>Индекс: <?= Html::encode($order->zip) ?></li>
     <?php endif;?>
+    <li>Стоимость доставки: <?= Html::encode($order->shipping_cost) ?></li>
 </ul>
 
 <h2>Комментарий</h2>
