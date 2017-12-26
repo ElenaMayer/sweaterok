@@ -37,7 +37,6 @@ $this->params['breadcrumbs'][] = $product->title;
                     <?php endforeach;?>
                 </div>
             </div><!-- /.swiper-container -->
-
         </div><!-- /.product-slider-wrapper -->
     </div>
     <div class="col-md-6 product-desc-col">
@@ -46,19 +45,10 @@ $this->params['breadcrumbs'][] = $product->title;
                 <?= $product->title?>
             </h2><!-- /.product-name -->
             <div class="product-status">
-                <span><?php if($product->is_in_stock):?>В наличии<?php else:?>Отсутствует<?php endif;?></span>
+                <span<?php if($product->is_in_stock):?> class="green">В наличии<?php else:?> class="red">Отсутствует<?php endif;?></span>
                 <span>-</span>
                 <small>Арт: <?= $product->article?></small>
             </div><!-- /.product-status -->
-<!--            <div class="product-stars">-->
-<!--                    <span class="rating">-->
-<!--                        <span class="star"></span>-->
-<!--                        <span class="star"></span>-->
-<!--                        <span class="star"></span>-->
-<!--                        <span class="star"></span>-->
-<!--                        <span class="star"></span>-->
-<!--                    </span>-->
-<!--            </div><!-- /.product-stars -->
             <div class="product-description">
                 <p><?= $product->description?></p>
             </div><!-- /.product-description -->

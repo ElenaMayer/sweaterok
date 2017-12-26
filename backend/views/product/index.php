@@ -24,6 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            [
+                'format' => 'image',
+                'value'=>function($model) { return isset($model->images[0])?$model->images[0]->getUrl('small'):''; }
+                ],
             'sort',
             'article',
             'title',

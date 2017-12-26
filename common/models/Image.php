@@ -53,7 +53,7 @@ class Image extends \yii\db\ActiveRecord
 
     public function getUrl($size = 'origin')
     {
-        return Yii::getAlias('@web/uploads/product/' . $this->product_id . '_' . $this->id . '_' . $size . '.jpg');
+        return Yii::getAlias('@frontendWebroot/uploads/product/' . $this->product_id . '_' . $this->id . '_' . $size . '.jpg');
     }
 
     public function afterDelete()

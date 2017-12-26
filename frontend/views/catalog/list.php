@@ -16,28 +16,28 @@ if($category) {
 <div class="row">
     <div class="col-md-9 col-md-push-3">
         <div class="product-header-actions">
-            <form action="product-grid.html" method="POST" class="form-inline" >
+            <form method="POST" class="form-inline">
                 <div class="row">
                     <div class="col-md-4 col-sm-6">
-                        <div class="form-group pull-left">
-                            <label for="p_show">Показать</label>
-                            <select name="p_show" id="p_show" class="form-control input-sm" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                                <option value="<?= StaticFunction::addGetParamToCurrentUrl('limit', '12') ?>" <?php if(!Yii::$app->request->get('limit') || Yii::$app->request->get('limit') == '12'):?>selected="selected"<?php endif;?>>12</option>
-                                <option value="<?= StaticFunction::addGetParamToCurrentUrl('limit', '24') ?>" <?php if(Yii::$app->request->get('limit') && Yii::$app->request->get('limit') == '24'):?>selected="selected"<?php endif;?>>24</option>
-                                <option value="<?= StaticFunction::addGetParamToCurrentUrl('limit', '48') ?>" <?php if(Yii::$app->request->get('limit') && Yii::$app->request->get('limit') == '48'):?>selected="selected"<?php endif;?>>48</option>
-                            </select>
-                            <strong>на странице</strong>
-                        </div><!-- /.form-group -->
+                        <div class="view-count">
+                            <?php
+                            $begin = $pagination->getPage() * $pagination->pageSize + 1;
+                            $end = $begin + $pageCount - 1;
+                            ?>
+                            <span class="text-muted">Товар с <?= $begin ?> по <?= $end ?> из <?= $pagination->totalCount ?></span>
+                        </div>
                     </div>
                     <div class="col-md-8 col-sm-6 col-xs-12">
                         <div class="form-show-sort">
-                            <div class="view-count">
-                                <?php
-                                $begin = $pagination->getPage() * $pagination->pageSize + 1;
-                                $end = $begin + $pageCount - 1;
-                                ?>
-                                <span class="text-muted">Товар с <?= $begin ?> по <?= $end ?> из <?= $pagination->totalCount ?></span>
-                            </div>
+                            <div class="form-group pull-left">
+                                <label for="p_show">Показать</label>
+                                <select name="p_show" id="p_show" class="form-control input-sm" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                    <option value="<?= StaticFunction::addGetParamToCurrentUrl('limit', '12') ?>" <?php if(!Yii::$app->request->get('limit') || Yii::$app->request->get('limit') == '12'):?>selected="selected"<?php endif;?>>12</option>
+                                    <option value="<?= StaticFunction::addGetParamToCurrentUrl('limit', '24') ?>" <?php if(Yii::$app->request->get('limit') && Yii::$app->request->get('limit') == '24'):?>selected="selected"<?php endif;?>>24</option>
+                                    <option value="<?= StaticFunction::addGetParamToCurrentUrl('limit', '48') ?>" <?php if(Yii::$app->request->get('limit') && Yii::$app->request->get('limit') == '48'):?>selected="selected"<?php endif;?>>48</option>
+                                </select>
+                                <strong>на странице</strong>
+                            </div><!-- /.form-group -->
                             <div class="form-group pull-right text-right">
                                 <label for="p_sort_by">Сортировка</label>
                                 <select name="p_sort_by" id="p_sort_by" class="form-control input-sm" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">

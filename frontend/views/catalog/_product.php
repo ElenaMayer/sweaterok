@@ -46,9 +46,11 @@ use yii\helpers\Url;
                 <?php endforeach;?>
             </div>
         </div><!-- /.product-hover -->
-<!--        <span class="product-label hot">-->
-<!--            <span>hot</span>-->
-<!--        </span>-->
+        <?php if($model->is_novelty):?>
+            <span class="product-label new">
+                <span>Новинка</span>
+            </span>
+        <?php endif;?>
     </div><!-- /.product-media -->
     <div class="product-body">
         <h2 class="product-name">

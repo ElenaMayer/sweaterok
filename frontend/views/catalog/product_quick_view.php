@@ -15,7 +15,7 @@ use yii\helpers\Html;
                 <a href="/catalog/<?= $product->category->slug?>/<?= $product->id?>" title="<?= $product->title?>"><?= $product->title?></a>
             </h2><!-- /.product-name -->
             <div class="product-status">
-                <span><?php if($product->is_in_stock):?>В наличии<?php else:?>Отсутствует<?php endif;?></span>
+                <span<?php if($product->is_in_stock):?> class="green">В наличии<?php else:?> class="red">Отсутствует<?php endif;?></span>
                 <span>-</span>
                 <span>Арт: <?= $product->article?></span>
             </div><!-- /.product-status -->

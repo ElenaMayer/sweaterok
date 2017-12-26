@@ -86,28 +86,32 @@ class CatalogController extends \yii\web\Controller
 
     public function actionProduct($categorySlug, $productId)
     {
-        $category = Category::find()->where(['slug' => $categorySlug])->one();
         $product = Product::find()->where(['id' => $productId])->one();
-        $relatedProducts = Product::find()
-            ->where('id != :id', ['id'=>$productId])
-            ->andWhere(['is_active' => 1, 'is_in_stock' => 1])
-            ->limit(Yii::$app->params['productPageRelatedCount'])
-            ->all();
-        $imagesForZoom = [];
-        foreach ($product->images as $image){
-            $imagesForZoom[] = [
-                'image'=>$image->getUrl(),
-                'small'=>$image->getUrl('medium'),
-                'medium'=>$image->getUrl()
-            ];
-        }
+        if($product->is_active){
+            $category = Category::find()->where(['slug' => $categorySlug])->one();
+            $relatedProducts = Product::find()
+                ->where('id != :id', ['id'=>$productId])
+                ->andWhere(['is_active' => 1, 'is_in_stock' => 1])
+                ->limit(Yii::$app->params['productPageRelatedCount'])
+                ->all();
+            $imagesForZoom = [];
+            foreach ($product->images as $image){
+                $imagesForZoom[] = [
+                    'image'=>$image->getUrl(),
+                    'small'=>$image->getUrl('medium'),
+                    'medium'=>$image->getUrl()
+                ];
+            }
 
-        return $this->render('product', [
-            'category' => $category,
-            'product' => $product,
-            'relatedProducts' => $relatedProducts,
-            'images' => $imagesForZoom,
-        ]);
+            return $this->render('product', [
+                'category' => $category,
+                'product' => $product,
+                'relatedProducts' => $relatedProducts,
+                'images' => $imagesForZoom,
+            ]);
+        } else {
+            return $this->redirect('/catalog/list');
+        }
     }
 
     public function actionQuickview($id)

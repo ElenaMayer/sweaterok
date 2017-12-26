@@ -14,8 +14,9 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
 ?>
 
 <?php if (Yii::$app->user->isGuest): ?>
+    <?php Yii::$app->user->setReturnUrl($_SERVER['REQUEST_URI']); ?>
     <div class="text-alert">
-        <p>Уже зарегистрированы? <a href="#">Войти</a></p>
+        <p>Уже зарегистрированы? <a href="/user/login">Войти</a></p>
     </div><!-- /.text-alert -->
 <?php endif;?>
 <div class="row">
@@ -53,40 +54,10 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
     <div class="col-md-6">
         <div class="payment-right">
             <h2>Ваш заказ</h2>
-
             <div class="payment-detail-wrapper">
                 <ul class="cart-list">
                     <?php foreach ($products as $p):?>
-                        <?php $product = $p->getProduct(); ?>
-                    <li>
-                        <div class="cart-item">
-                            <div class="product-image">
-                                <a href="<?= $product->images[0]->getUrl('small')?>" title="<?= Html::encode($product->title)?>">
-                                    <?= Html::img($product->images[0]->getUrl('small'), ['width' => '100%', 'alt'=>$product->title]);?>
-                                </a>
-                            </div>
-                            <div class="product-body">
-                                <div class="product-name">
-                                    <h3>
-                                        <a href="/catalog/<?= $product->category->slug?>/<?= $product->id?>" title="<?= $p->price?>"><?= Html::encode($product->title)?></a>
-                                    </h3>
-                                </div>
-                                <div class="product-size">
-                                    <span><?= $p->size?>рр</span>
-                                </div>
-                                <div class="product-count">
-                                    <?php $quantity = $p->getQuantity()?>
-                                    <!-- Html::a('-', ['cart/update', 'id' => $product->getId(), 'size' => $p->size, 'quantity' => $quantity - 1], ['class' => 'btn', 'disabled' => ($quantity - 1) < 1])-->
-                                    <span><?= $quantity?>шт.</span>
-                                    <!-- Html::a('+', ['cart/update', 'id' => $product->getId(), 'size' => $p->size, 'quantity' => $quantity + 1], ['class' => 'btn'])-->
-                                </div>
-                                <div class="product-price">
-                                    <span><?= (int)$p->getCost()?>₽</span>
-                                </div>
-                            </div>
-                        </div><!-- /.cart-item -->
-                        <?= Html::a('<span class="icon icon-remove"></span>', ['cart/remove', 'id' => $product->getId(), 'size' => $p->size], ['class' => 'remove-cart', 'title' => "Удалить"])?>
-                    </li>
+                        <?= $this->render('_products', ['position'=>$p]); ?>
                     <?php endforeach ?>
                 </ul> <!-- /.cart-list -->
             </div><!-- /.payment-detail-wrapper -->
@@ -145,6 +116,8 @@ $this->params['breadcrumbs'][] = 'Оформление заказа';
                     </tbody>
                 </table>
             </div><!-- /.cart-total -->
+
+            <div class="cart-offer">Нажимая на кнопку "Отправить заказ",</br> вы принимаете условия <?= Html::a('Публичной оферты', ['site/offer'])?></div>
 
             <div class="col-xs-12">
                 <?= Html::submitButton('Отправить заказ', ['class' => 'btn btn-lg btn-primary']) ?>

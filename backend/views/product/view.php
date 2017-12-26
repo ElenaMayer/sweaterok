@@ -13,7 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="product-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    <div class="product-images">
+        <?php foreach ($model->images as $image):?>
+            <?= Html::img($image->getUrl('small'));?>
+        <?php endforeach;?>
+    </div>
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [

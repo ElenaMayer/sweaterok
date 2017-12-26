@@ -14,6 +14,12 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <div class="product-images">
+        <?php foreach ($model->images as $image):?>
+            <?= Html::img($image->getUrl('small'));?>
+        <?php endforeach;?>
+    </div>
+
     <?= $this->render('_form', [
         'model' => $model,
         'categories' => $categories,
