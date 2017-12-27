@@ -62,16 +62,18 @@ class CartController extends \yii\web\Controller
 
                 foreach ($products as $product) {
                     $p = $product->getProduct();
-                    $orderItem = new OrderItem();
-                    $orderItem->order_id = $order->id;
-                    $orderItem->title = $p->article . ' ' . $p->title;
-                    $orderItem->price = $product->getPrice();
-                    $orderItem->product_id = $product->id;
-                    $orderItem->quantity = $product->getQuantity();
-                    if (!$orderItem->save(false)) {
-                        $transaction->rollBack();
-                        \Yii::$app->session->addFlash('error', 'Невозможно создать заказ. Пожалуйста свяжитесь с нами.');
-                        return $this->redirect('/catalog/list');
+                    if($p->is_active && $p->is_in_stock){
+                        $orderItem = new OrderItem();
+                        $orderItem->order_id = $order->id;
+                        $orderItem->title = $p->article . ' ' . $p->title;
+                        $orderItem->price = $product->getPrice();
+                        $orderItem->product_id = $product->id;
+                        $orderItem->quantity = $product->getQuantity();
+                        if (!$orderItem->save(false)) {
+                            $transaction->rollBack();
+                            \Yii::$app->session->addFlash('error', 'Невозможно создать заказ. Пожалуйста свяжитесь с нами.');
+                            return $this->redirect('/catalog/list');
+                        }
                     }
                 }
 

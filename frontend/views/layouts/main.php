@@ -326,7 +326,7 @@ MyAppAsset::register($this);
             <small>Наверх</small>
         </a><!-- /.back-top -->
     </footer><!-- /footer -->
-
+    <?= $this->render('_metrika'); ?>
     <?php $this->endBody() ?>
     <script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
 </body>
