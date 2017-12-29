@@ -68,6 +68,7 @@ class CartController extends \yii\web\Controller
                         $orderItem->title = $p->article . ' ' . $p->title;
                         $orderItem->price = $product->getPrice();
                         $orderItem->product_id = $product->id;
+                        $orderItem->size = $product->size;
                         $orderItem->quantity = $product->getQuantity();
                         if (!$orderItem->save(false)) {
                             $transaction->rollBack();
