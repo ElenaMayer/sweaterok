@@ -44,5 +44,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'zip',
         ],
     ]) ?>
+    <h2>Заказ:</h2>
+    <?php
+    $sum = 0;
+    foreach ($model->orderItems as $item): ?>
+        <?php $sum += $item->quantity * $item->price ?>
+        <li><?= Html::encode($item->title . ' (' . $item->size . ' размер) x ' . $item->quantity . ' x ' . (int)$item->price . '₽') ?></li>
+    <?php endforeach ?>
+    </ul>
+
+    <p><string>Итого: </string> <?php echo $sum?>₽</p>
 
 </div>

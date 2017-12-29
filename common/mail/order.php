@@ -33,7 +33,7 @@ use yii\helpers\Html;
 $sum = 0;
 foreach ($order->orderItems as $item): ?>
     <?php $sum += $item->quantity * $item->price ?>
-    <li><?= Html::encode($item->title . ' x ' . $item->quantity . ' x ' . (int)$item->price . '₽') ?></li>
+    <li><?= Html::encode($item->title . ' (' . $item->size . ' размер) x ' . $item->quantity . ' x ' . (int)$item->price . '₽') ?></li>
 <?php endforeach ?>
 </ul>
 
