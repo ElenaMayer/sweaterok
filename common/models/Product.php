@@ -173,6 +173,14 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
             return $this->price;
     }
 
+    public function getSale()
+    {
+        if ($this->new_price > 0)
+            return (int)(100-$this->new_price*100/$this->price);
+        else
+            return false;
+    }
+
     /**
      * @inheritdoc
      */

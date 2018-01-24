@@ -48,7 +48,7 @@ use yii\helpers\Url;
         </div><!-- /.product-hover -->
         <?php if($model->new_price > 0):?>
         <span class="product-label sale">
-                <span>-<?= (int)($model->new_price*100/$model->price); ?>%</span>
+                <span>-<?= $model->getSale(); ?>%</span>
             </span>
         <?php elseif($model->is_novelty):?>
             <span class="product-label new">
