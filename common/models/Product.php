@@ -18,6 +18,7 @@ use Imagine\Image\Box;
  * @property string $description
  * @property integer $category_id
  * @property string $price
+ * @property string $new_price
  * @property string $article
  * @property string $sex
  * @property integer $is_in_stock
@@ -70,7 +71,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
         return [
             [['description'], 'string'],
             [['category_id', 'is_in_stock', 'is_active', 'is_novelty', 'sort'], 'integer'],
-            [['price'], 'number'],
+            [['price', 'new_price'], 'number'],
             [['time, color, sizes'], 'safe'],
             [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 10],
             [['title', 'slug', 'article', 'sex', 'structure'], 'string', 'max' => 255],
@@ -90,6 +91,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
             'description' => 'Описание',
             'category_id' => 'Категория',
             'price' => 'Цена',
+            'new_price' => 'Цена со скидкой',
             'article' => 'Артикул',
             'sex' => 'Пол',
             'is_in_stock' => 'В наличии',
@@ -165,7 +167,10 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
      */
     public function getPrice()
     {
-        return $this->price;
+        if ($this->new_price > 0)
+            return $this->new_price;
+        else
+            return $this->price;
     }
 
     /**

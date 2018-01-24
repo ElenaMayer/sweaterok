@@ -32,6 +32,8 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'new_price')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'article')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'sex')->dropDownList(['female' => 'Женский', 'male' => 'Мужской']) ?>

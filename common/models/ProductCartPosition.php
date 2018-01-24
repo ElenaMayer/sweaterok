@@ -35,7 +35,7 @@ class ProductCartPosition implements CartPositionInterface
         if(!$product->is_in_stock || !$product->is_active)
             return 0;
         else
-            return $product->price;
+            return $product->getPrice();
     }
 
     public function getSize()

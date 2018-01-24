@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'price',
+            'new_price',
             'is_active',
             'is_in_stock',
             [

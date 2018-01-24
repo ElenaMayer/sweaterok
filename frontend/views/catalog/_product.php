@@ -46,7 +46,11 @@ use yii\helpers\Url;
                 <?php endforeach;?>
             </div>
         </div><!-- /.product-hover -->
-        <?php if($model->is_novelty):?>
+        <?php if($model->new_price > 0):?>
+        <span class="product-label sale">
+                <span>-<?= (int)($model->new_price*100/$model->price); ?>%</span>
+            </span>
+        <?php elseif($model->is_novelty):?>
             <span class="product-label new">
                 <span>Новинка</span>
             </span>
@@ -60,7 +64,12 @@ use yii\helpers\Url;
             <span><?= $model->category->title?></span>
         </div><!-- /.product-category -->
         <div class="product-price">
-            <span class="amount"><?= (int)$model->price ?>₽</span>
+            <?php if($model->new_price > 0):?>
+                <span class="amount"><?= (int)$model->new_price ?>₽</span>
+                <del class="amount"><?= (int)$model->price ?>₽</del>
+            <?php else:?>
+                <span class="amount"><?= (int)$model->price ?>₽</span>
+            <?php endif;?>
         </div><!-- /.product-price -->
     </div><!-- /.product-body -->
 </div><!-- /.product -->

@@ -83,7 +83,12 @@ $this->params['breadcrumbs'][] = $product->title;
                 <?php endif;?>
                 <div class="product-list-actions" data-id="<?= $product->id ?>">
                         <span class="product-price">
-                            <span class="amount"><?= (int)$product->price?>₽</span>
+                            <?php if($product->new_price > 0):?>
+                                <span class="amount"><?= (int)$product->new_price ?>₽</span>
+                                <del class="amount"><?= (int)$product->price ?>₽</del>
+                            <?php else:?>
+                                <span class="amount"><?= (int)$product->price ?>₽</span>
+                            <?php endif;?>
                         </span><!-- /.product-price -->
                     <?php if($product->is_in_stock):?>
                         <?php $currentSize = array_shift($sizes);?>

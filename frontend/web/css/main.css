@@ -4517,6 +4517,7 @@ h2.entry-title {
 
 .product-label.sale {
   background-color: #ffa800;
+  width: 50px;
 }
 
 .product-grid .product-name {
