@@ -20,7 +20,12 @@ use yii\helpers\Html;
                 <span>Арт: <?= $product->article?></span>
             </div><!-- /.product-status -->
             <div class="product-price">
-                <span class="amount"><?= (int)$product->price?>₽</span>
+                <?php if($product->new_price > 0):?>
+                    <span class="amount"><?= (int)$product->new_price ?>₽</span>
+                    <del class="amount"><?= (int)$product->price ?>₽</del>
+                <?php else:?>
+                    <span class="amount"><?= (int)$product->price ?>₽</span>
+                <?php endif;?>
             </div><!-- /.product-price -->
             <div class="product-description">
                 <p><?= $product->description?></p>
